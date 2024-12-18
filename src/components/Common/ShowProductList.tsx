@@ -1,48 +1,31 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { sizes } from "../constants";
-import { productType } from "../types";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { products } from "../constants";
-import ProductCard from "./ProductCard";
-import {QRCodeSVG} from 'qrcode.react';
+// import React, { useState, useLayoutEffect, useEffect } from "react";
+
+// import { useNavigate } from "react-router-dom";
+// import { sizes } from "../constants";
+// import { productType } from "../types";
+// import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useEffect,useState } from "react";
+import { products } from "../../constants";
+import ProductCard from "../Cart/ProductCard";
+// import {QRCodeSVG} from 'qrcode.react';
 const ShowProductList = ({
 
-  setQuantityProducts,
   productPerPage,
   isShownPagination,
   isShowNavigation,
 }: {
 
-  setQuantityProducts?: (quantity: number) => void;
   productPerPage: number;
   isShownPagination: boolean;
   isShowNavigation: boolean;
 }) => {
-  const productInfo = {
-    name: 'Áo Dài Thêu Tay',
-    size: 'M',
-    material: 'Lụa',
-    collection: 'Xuân 2024',
-    story: 'Sản phẩm làm từ lụa tự nhiên, mang đậm nét văn hóa truyền thống.'
-  };
-  const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-N:Áo Dài Vải Lụa
-FN:Áo Dài Vải Lụa
-ORG:BST Xuân Hè 2024
-NOTE:Mẫu áo dài lấy cảm hứng từ văn hóa truyền thống, kết hợp với họa tiết hiện đại
-URL:https://yourstore.com/products/ao-dai-vai-lua
-END:VCARD
-`;
-  const jsonData = JSON.stringify(productInfo);
-  const axiosPrivate = useAxiosPrivate();
-  const [allProducts, setAllProducts] = useState<productType[]>([]);
+
+  // const axiosPrivate = useAxiosPrivate();
+  // const [allProducts, setAllProducts] = useState<productType[]>([]);
   const [filterProducts, setFilterProducts] = useState<any[]>();
   const [currentProductIndex, setCurrentProductIndex] = useState<number>(0);
-  const [hoverProduct, setHoverProduct] = useState("");
-  const [currentSize, setCurrentSize] = useState("");
+  // const [hoverProduct, setHoverProduct] = useState("");
+  // const [currentSize, setCurrentSize] = useState("");
   const [start, setStart] = useState(0);
 
   useEffect(() => {
@@ -66,20 +49,14 @@ END:VCARD
 
   return (
     <div className="w-full relative">
-      <div className="flex flex-row space-x-6 relative">
+      <div className={`flex flex-row  space-x-6 relative ${productPerPage >=4 &&'flex-wrap'}`}>
         {filterProducts &&
           filterProducts.map((product, index) => (
-            <div key={index}>
+            <div key={index} className={`${productPerPage >=4 &&'max-w-[23%]'} `}>
               <ProductCard product={product} />
             </div>
           ))}
       </div>
-      <QRCodeSVG 
-         value={vCardData} 
-         size={200} 
-         bgColor="#ffffff" 
-         fgColor="#702272" 
-      />  
       {isShowNavigation && (
         <>
          <div className="absolute top-0 h-full z-30 ">
@@ -129,6 +106,7 @@ END:VCARD
           products.map((product, index) => (
             <div
               onClick={() => {
+                console.log(product.image);
                 setCurrentProductIndex(index);
               }}
               key={index}

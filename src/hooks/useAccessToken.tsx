@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { userSelector,accessTokenSelector } from "../store/selector";
+import {accessTokenSelector } from "../store/selector";
 
 const useAccessToken = () => {
   const accessToken = useSelector(accessTokenSelector);

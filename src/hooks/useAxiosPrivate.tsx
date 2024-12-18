@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import axiosPrivate from "../api/index";
 import useAuthContext from "./useAuthContext";
 import useRefreshToken from "./useRefreshToken";
-import { useNavigate } from "react-router-dom";
+
 
 const useAxiosPrivate = () => {
   const { accessToken } = useAuthContext();
   const refresh = useRefreshToken();
-  const navigate = useNavigate();
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
       function (config) {

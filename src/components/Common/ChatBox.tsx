@@ -1,8 +1,8 @@
 import { useState, useEffect,useContext,useRef } from "react";
-import axioisPrivate from "../api";
-import useAuthContext from "../hooks/useAuthContext";
-import { messageType } from "../types";
-import { SocketContext } from "../App";
+import axioisPrivate from "../../api";
+import useAuthContext from "../../hooks/useAuthContext";
+import { messageType } from "../../types";
+import { SocketContext } from "../../App";
 
 function ChatBox({setShowChatBox}:{setShowChatBox:React.Dispatch<React.SetStateAction<boolean> >}) {
 

@@ -1,23 +1,24 @@
-import { sizes, afterBuys } from "../../constants/index";
-import { useParams, useNavigate } from "react-router-dom";
-import { productType, productAddCartType } from "../../types";
-import {
-  OutstandingFeature,
-  ShowProductList,
-  ReviewProduct,
-} from "../../components";
-import { useEffect, useState } from "react";
-import useAuthContext from "../../hooks/useAuthContext";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { sizes } from "../../constants/index";
+import ShowProductList from "../../components/Common/ShowProductList";
+import SuggestSize from "../../components/ProductDetail/SuggestSize";
+// import useAuthContext from "../../hooks/useAuthContext";
+// import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { products } from "../../constants/index";
-import Swiper from "swiper";
-import { Navigation, Pagination } from "swiper/modules";
-// import Swiper and modules styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { FaPlus, FaMinus } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useCartStore, useToastStore } from "../../store/store";
+import { useParams } from "react-router-dom";
 const ProducDetail = () => {
   // const { accessToken, user } = useAuthContext();
+  function removeVietnameseAccents(str: string) {
+    return str
+      .normalize("NFD") // Chuẩn hóa chuỗi về dạng Normalization Form D
+      .replace(/[\u0300-\u036f]/g, "") // Loại bỏ các dấu thanh
+      .replace(/đ/g, "d") // Thay thế ký tự đặc biệt
+      .replace(/Đ/g, "D")
+      .toLowerCase();
+  }
+  const params = useParams();
   const descriptions = [
     {
       title: "Ý nghĩa tên",
@@ -38,11 +39,43 @@ const ProducDetail = () => {
         "Thiết kế đơn giản chú trọng vào chất liệu và họa tiết phù hợp những dịp quan trọng khác nhau đều có thể sử dụng được.",
     },
   ];
-  const axiosPrivate = useAxiosPrivate();
-  const params = useParams();
-  const navigate = useNavigate();
-  const img = [1, 2, 3, 4];
   const [currentProduct, setCurrentProduct] = useState(products[0]);
+  useEffect(() => {
+    if (params.name) {
+      const validProduct = products.find((product) => {
+        return (
+          removeVietnameseAccents(product.name) ==
+          params.name?.replace(/-/g, " ")
+        );
+      });
+
+      if (validProduct) {
+        setCurrentProduct(validProduct);
+      }
+    }
+  }, [params.name]);
+
+  const { addProductToCart } = useCartStore();
+  // const axiosPrivate = useAxiosPrivate();
+  // const params = useParams();
+  // const navigate = useNavigate();
+  const img = [1, 2, 3, 4];
+  const [quantity, setQuantity] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [isOpenSuggestSize, setIsOpenSuggestSize] = useState(false);
+  const { setMessage, setStatus } = useToastStore();
+
+  const handleAddProductToCart = () => {
+    setMessage("Add Product to Cart Success !");
+    setStatus("success");
+
+    const productAddCart = {
+      productId: currentProduct.id,
+      quantity,
+      size: selectedSize,
+    };
+    addProductToCart(productAddCart);
+  };
 
   // useEffect(() => {
   //   axiosPrivate
@@ -53,17 +86,17 @@ const ProducDetail = () => {
   //     });
   // }, [params, accessToken]);
 
-  const [productAddCart, setProductAddCart] = useState<productAddCartType>({
-    status: "Mua",
-    quantity: 1,
-    size: "S",
-    startRentDate: String(new Date().toISOString().split("T")[0]),
-    endRentDate: String(new Date().toISOString().split("T")[0]),
-  });
+  // const [productAddCart, setProductAddCart] = useState<productAddCartType>({
+  //   status: "Mua",
+  //   quantity: 1,
+  //   size: "S",
+  //   startRentDate: String(new Date().toISOString().split("T")[0]),
+  //   endRentDate: String(new Date().toISOString().split("T")[0]),
+  // });
 
-  const [rerender, setRerender] = useState(false);
-  const [currentImg, setCurrentImg] = useState(currentProduct?.image);
-  const reviewNumber = Math.round(Math.random() * (5000 - 1000) + 1000);
+  // const [rerender, setRerender] = useState(false);
+  // const [currentImg, setCurrentImg] = useState(currentProduct?.image);
+  // const reviewNumber = Math.round(Math.random() * (5000 - 1000) + 1000);
 
   // const handleAddProductToCart = () => {
   //   axiosPrivate.post(`/cart/add`, {
@@ -75,24 +108,26 @@ const ProducDetail = () => {
   //   setRerender(!rerender);
   // };
   return (
-    <div className="relative flex flex-col w-full justify-center items-center gap-10 mt-6">
-      <div className=" flex flex-row w-[95%]  justify-center py-[20px] items-start gap-10 ">
+    <div className="relative mt-6 flex w-full flex-col items-center justify-center gap-10">
+      {isOpenSuggestSize && <SuggestSize />}
+
+      <div className="flex w-[95%] flex-row items-start justify-center gap-10 py-[20px]">
         {/* IMAGE SESSION */}
-        <div className="flex flex-col space-y-4 px-1 py-2 w-[40%] ">
+        <div className="flex w-[40%] flex-col space-y-4 px-1 py-2">
           <img src={currentProduct.image} />
 
           <div className="flex flex-row space-x-1">
             {img.map((val, index) => (
               <div
+                key={val}
                 className={`${
                   index != 0 && "translate-y-[-4px]"
-                } hover:translate-y-0 overflow-hidden h-[140px]`}
+                } h-[140px] overflow-hidden hover:translate-y-0`}
               >
                 <img
-                  className={`
-             hover:translate-y-0 hover:opacity-100   hover:cursor-pointer  duration-500 ${
-               index != 0 ? "opacity-60 translate-y-1  " : "translate-y-0"
-             } `}
+                  className={`duration-500 hover:translate-y-0 hover:cursor-pointer hover:opacity-100 ${
+                    index != 0 ? "translate-y-1 opacity-60" : "translate-y-0"
+                  } `}
                   src={currentProduct.image}
                 />
               </div>
@@ -101,30 +136,33 @@ const ProducDetail = () => {
         </div>
 
         {/* DESCRIPTION SESSION */}
-        <div className="flex flex-col justify-around  px-2 w-[60%]">
+        <div className="flex w-[60%] flex-col justify-around space-y-4 px-2">
           {/* HEADER */}
           <div>
-            <h1 className="text-3xl font-semibold font-raleway ">
-              Áo dài Tự Hà
+            <h1 className="font-raleway text-3xl font-semibold">
+              {currentProduct.name}
             </h1>
-            <h2 className="text-2xl font-semibold font-raleway">
-              5.580.000 VND
+            <h2 className="font-raleway text-2xl font-semibold">
+              {currentProduct.priceSale} VND
             </h2>
           </div>
 
           {/* BODY */}
-          <div>
-            <table className="flex flex-col mt-8">
+          <div className="flex flex-col space-y-4">
+            <table className="mt-4 flex flex-col">
               <tbody>
-                {descriptions.map((description) => (
-                  <tr className=" flex flex-row  items-center py-2 border-b-[1px] border-gray-200">
-                    <td className="text-sm text-[#282828]  font-raleway w-[20%]">
+                {descriptions.map((description, index) => (
+                  <tr
+                    key={index}
+                    className="flex flex-row items-center border-b-[1px] border-gray-200 py-2"
+                  >
+                    <td className="w-[20%] font-raleway text-sm text-[#282828]">
                       {description.title}
                     </td>
-                    <td className="text-sm text-[#666666] font-raleway w-[2%]">
+                    <td className="w-[2%] font-raleway text-sm text-[#666666]">
                       :
                     </td>
-                    <td className="text-sm text-[#666666] font-raleway w-[78%] ">
+                    <td className="w-[78%] font-raleway text-sm text-[#666666]">
                       {description.content}
                     </td>
                   </tr>
@@ -132,35 +170,105 @@ const ProducDetail = () => {
               </tbody>
             </table>
 
-            <div className="text-[#282828] text-lg mt-6">
+            <div className="mt-6 text-lg text-[#282828]">
               Lưu ý: Màu sắc sản phẩm có thể đậm/nhạt do hiệu ứng ánh sáng, cài
               đặt độ sáng/độ tương phản của màn hình hiển thị hoặc cơ chế phân
               biệt màu của mắt.
             </div>
 
-            <div>
-            <h1 className="text-3xl font-semibold font-raleway ">
-              Áo dài Tự Hà
-            </h1>
-            <h2 className="text-2xl font-semibold font-raleway">
-              5.580.000 VND
-            </h2>
-            <div><span>Hướng dẫn đo</span>
-            |
-             <span>Bảng kích cỡ</span>
-             </div>
-          </div>
+            <div className="mt-4 flex w-full flex-row items-start justify-between border-y-[1px] border-gray-200 px-2 py-4">
+              <div className="flex flex-row space-x-2">
+                <img src={currentProduct.image} className="h-10 w-10" />
+                <div className="flex w-full flex-col space-y-1">
+                  <h1 className="font-raleway font-normal text-[#333333]">
+                    {currentProduct.name}
+                  </h1>
+                  <h2 className="font-raleway text-sm font-semibold text-[#111111]">
+                    {currentProduct.priceSale} VND
+                  </h2>
+                  <div className="flex w-full flex-row items-center justify-between">
+                    <p className="text-[#231f20 ] font-normal">
+                      SIZE :{" "}
+                      {selectedSize && (
+                        <span className="font-bold">{selectedSize} </span>
+                      )}
+                      {selectedSize &&
+                        sizes.find((s) => s.size == selectedSize)?.description}
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center space-x-1">
+                    {sizes.map((size) => (
+                      <div
+                        key={size.size}
+                        onClick={() => {
+                          setSelectedSize(size.size);
+                        }}
+                        className={`border-[1px] border-gray-200 px-2 font-raleway text-lg hover:cursor-pointer hover:bg-black hover:text-white ${
+                          selectedSize == size.size && "bg-black text-white"
+                        }`}
+                      >
+                        {size.size}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-row">
+                <div
+                  onClick={() => {
+                    if (quantity > 0) setQuantity(quantity - 1);
+                  }}
+                  className="flex items-center justify-center border-[1px] border-gray-300 bg-[#f9f9f9] p-2 px-4 hover:cursor-pointer hover:bg-gray-400"
+                >
+                  <FaMinus size={8} color="black" />
+                </div>
+                <div className="flex items-center justify-center border-[1px] border-gray-300 bg-white p-2 px-4 shadow-xl">
+                  {quantity}
+                </div>
+                <div
+                  onClick={() => {
+                    setQuantity(quantity + 1);
+                  }}
+                  className="flex items-center justify-center border-[1px] border-gray-300 bg-[#f9f9f9] p-2 px-4 hover:cursor-pointer hover:bg-gray-400"
+                >
+                  <FaPlus size={8} color="black" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col space-y-3">
+              <h1 className="flex flex-row font-raleway font-normal text-[#333333]">
+                Tổng tiền{" "}
+                <p className="font-raleway font-semibold text-[#111111]">
+                  : {currentProduct.priceSale} VND
+                </p>
+              </h1>
+              <div
+                onClick={() => setIsOpenSuggestSize(true)}
+                className="text-sm text-primary_1 underline hover:cursor-pointer"
+              >
+                Hướng dẫn chọn size
+              </div>
+              <div
+                onClick={handleAddProductToCart}
+                className="w-[30%] bg-primary_1 py-2 text-center uppercase text-white hover:cursor-pointer hover:bg-primary_2"
+              >
+                Thêm vào giỏ hàng
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col px-2 space-y-16 items-center justify-center ">
-        <h3 className="text-[#242424] text-3xl ">CÓ THỂ BẠN CŨNG THÍCH</h3>
-        
-        <ShowProductList 
-        productPerPage={4}
-        isShowNavigation={false}
-        isShownPagination={false} />
+      <div className="flex flex-col items-center justify-center space-y-16 px-2">
+        <h3 className="text-3xl text-[#242424]">CÓ THỂ BẠN CŨNG THÍCH</h3>
+
+        <ShowProductList
+          productPerPage={4}
+          isShowNavigation={false}
+          isShownPagination={false}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { footerItems } from "../constants";
+// import { footerItems } from "../constants";
 import { FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
 import { FaFacebookF, FaTiktok, FaInstagram } from "react-icons/fa";
@@ -23,7 +23,7 @@ const Footer = () => {
   ];
   const [active, setActives] = useState("");
   return (
-    <div className="bg-white flex flex-col space-y-8 w-full p-[30px] border-t-[1px] border-gray-300 mt-12">
+    <div className="bg-whiteS flex flex-col space-y-8 w-full p-[30px] border-t-[1px] border-gray-300 mt-12">
       {/* <div className="flex flex-col space-y-8 items-center justify-center w-full">
         <h1 className="text-4xl text-black font-[300] font-raleway ">
           INSTAGRAM

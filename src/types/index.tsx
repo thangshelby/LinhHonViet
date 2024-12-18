@@ -12,18 +12,16 @@ export const userInit = {
   id: 0,
   firstname: "",
   lastname: "",
-  phone: "",
+  phone: "",  
   email: "",
   birth: "",
   gender: "",
 };
 
 export interface productAddCartType {
-  status: string;
+  productId: number;
   quantity: number;
-  size: string;
-  startRentDate?: string;
-  endRentDate?: string;
+  size: string
 }
 export interface productType {
   id: number;

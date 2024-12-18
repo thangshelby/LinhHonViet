@@ -1,19 +1,23 @@
-import { useState, useEffect, useContext } from "react";
-import { useNavigate,useParams  } from "react-router-dom";
-import { productsInCartType, categoryType } from "../types/index.tsx";
-import { SocketContext } from "../App.tsx";
-import useAxiosPrivate from "../hooks/useAxiosPrivate.tsx";
-import useAuthContext from "../hooks/useAuthContext.tsx";
-import { navbarLinks } from "../constants/index.ts";
+import { useState } from "react";
+import { useNavigate   ,useLocation} from "react-router-dom";
+import { navbarLinks } from "../../constants/index.ts";
 import Marquee from "react-fast-marquee";
 import { FaAngleDown } from "react-icons/fa";
-const Navbar = () => {
+import { useCartStore } from "../../store/store.tsx";
+
+const Navbar = ({
+  setIsOpenOverviewCart,
+}: {
+  setIsOpenOverviewCart: () => void;
+}) => {
   const navigate = useNavigate();
   // const { accessToken, user } = useAuthContext();
 
   // const socket = useContext(SocketContext);
   // const axiosPrivate = useAxiosPrivate();
-  const params= useParams();
+  const { productsInCart } = useCartStore();
+
+  const location = useLocation();
   const [scrollTop, setScrollTop] = useState(0);
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -22,8 +26,8 @@ const Navbar = () => {
   window.addEventListener("scroll", handleScroll);
 
   // const [linkIsHover, setLinkIsHover] = useState("");
-  const [categories, setCategories] = useState<categoryType[]>([]);
-  const [productsInCart, setProductInCart] = useState<productsInCartType[]>([]);
+  // const [categories, setCategories] = useState<categoryType[]>([]);
+  // const [productsInCart, setProductInCart] = useState<productsInCartType[]>([]);
 
   // useEffect(() => {
   //   if (accessToken) {
@@ -74,50 +78,60 @@ const Navbar = () => {
     "VOUCHER 500K CHO ĐƠN 3444k",
   ];
   return (
-    <div className={`${scrollTop<200?'relative':'fixed opacity-80 navbar'} top-0 left-0  w-full z-10`}>
-     {Object.keys(params).length <=0 &&(
-       <div className={`${scrollTop<200 ?'block' :'hidden'}  w-full px-32 bg-primary_1 py-4`}>
-        <Marquee gradient={false} speed={50}>
-          {marqueeText.map((text,index) => (
-            <div key={index}
-              className="flex flex-row gap-4 mx-8 
-            font-medium text-[12px]  hover:cursor-pointer"
-            >
-              {text}
-            </div>
-          ))}
-        </Marquee>
-      </div>
-     ) }
-     
-      <div className="flex flex-row justify-between px-6 bg-[#fcfcfc] shadow-2xl">
-        <div className="w-36 h-12">
-          <img src="https://theme.hstatic.net/200000284249/1000799870/14/logo.png?v=3938" />
+    <div
+      className={`${scrollTop < 200 ? "block" : "navbar fixed opacity-80"} left-0 top-0 z-40 w-full`}
+    >
+      {location.pathname==='/' && (
+        <div
+          className={`${scrollTop < 200 ? "block" : "hidden"} w-full bg-primary_1 px-32 py-4`}
+        >
+          <Marquee gradient={false} speed={50}>
+            {marqueeText.map((text, index) => (
+              <div
+                key={index}
+                className="mx-8 flex flex-row gap-4 text-[12px] font-medium hover:cursor-pointer"
+              >
+                {text}
+              </div>
+            ))}
+          </Marquee>
         </div>
-        <div className="flex flex-row justify-center items-center hover:cursor-pointer">
-          <div className="flex flex-row justify-evenly w-full gap-x-4 ">
-            {navbarLinks.map((category,index) => (
-              <div key={index} className="group flex flex-row  items-center hover:font-medium text-[13px] relative">
+      )}
+
+      <div className="flex flex-row justify-between bg-[#fcfcfc] px-6 shadow-2xl">
+        <div className="h-12 w-36">
+          <img
+          className="hover:cursor-pointer"
+          onClick={()=>{
+            navigate('/')
+          }}
+          src="https://theme.hstatic.net/200000284249/1000799870/14/logo.png?v=3938" />
+        </div>
+        <div className="flex flex-row items-center justify-center hover:cursor-pointer">
+          <div className="flex w-full flex-row justify-evenly gap-x-4">
+            {navbarLinks.map((category, index) => (
+              <div
+                key={index}
+                className="group relative flex flex-row items-center text-[13px] hover:font-medium"
+              >
                 <p>{category.title}</p>
                 {category.children && (
                   <FaAngleDown
-                    className="mt-[2px] group-hover:rotate-180 duration-500"
+                    className="mt-[2px] duration-500 group-hover:rotate-180"
                     size={14}
                   />
                 )}
                 {category.children && (
-                  <div
-                    className="category group-hover:flex text-[#222222] font-normal flex-col justify-center space-y-2 hidden p-2 bg-[#fcfcfc] 
-                   absolute left-[-20px] top-11 border-t-[1px] border-black show-down-to-up  
-                   duration-500 min-w-[180px]"
-                  >
-                    {category.children.map((subCate,index) => (
+                  <div className="category show-down-to-up absolute left-[-20px] top-11 hidden min-w-[180px] flex-col justify-center space-y-2 border-t-[1px] border-black bg-[#fcfcfc] p-2 font-normal text-[#222222] duration-500 group-hover:flex">
+                    {category.children.map((subCate, index) => (
                       <div
-                      onClick={()=>{
-                        navigate(`/collection/${subCate.title}`)
-                      }}
-                      key={index} className="flex flex-col gap-2 ">
-                        <h1 className="hover:underline inline-block">
+                        onClick={() => {
+                          navigate(`/collection/${subCate.title}`);
+                        }}
+                        key={index}
+                        className="flex flex-col gap-2"
+                      >
+                        <h1 className="inline-block hover:underline">
                           {subCate.title}
                         </h1>
                       </div>
@@ -126,21 +140,15 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <div className="absolute group-hover:"> </div>
+            <div className="group-hover: absolute"> </div>
           </div>
         </div>
 
-        <div
-          className="flex flex-row items-center justify-center 
-         space-x-4  h-[70px]  relative"
-        >
-          <div
-            className="flex flex-row items-center justify-between w-44 bg-gray-100 rounded-3xl 
-          p-2 px-3 border-[1px] border-gray-900"
-          >
+        <div className="relative flex h-[70px] flex-row items-center justify-center space-x-4">
+          {/* SEARCH */}
+          <div className="flex w-44 flex-row items-center justify-between rounded-3xl border-[1px] border-gray-900 bg-gray-100 p-2 px-3">
             <input
-              className="w-[80%]  outline-none bg-transparent placeholder:text-sm
-               placeholder:text-gray-700 text-gray-700  text-sm"
+              className="w-[80%] bg-transparent text-sm text-gray-700 outline-none placeholder:text-sm placeholder:text-gray-700"
               type="text"
               placeholder="Tìm kiếm..."
             />
@@ -156,9 +164,10 @@ const Navbar = () => {
             </svg>
           </div>
 
+          {/* AUTH */}
           <div
             onClick={() => {
-              // navigate("/auth/signin");
+              navigate("/auth/signin");
             }}
             className="flex flex-row items-center space-x-1 hover:cursor-pointer"
           >
@@ -175,11 +184,10 @@ const Navbar = () => {
             </svg>
           </div>
 
+          {/* CART */}
           <div
-            onClick={() => {
-              // navigate("/auth/signin");
-            }}
-            className="flex flex-row items-center space-x-1 hover:cursor-pointer"
+            onClick={setIsOpenOverviewCart}
+            className="group relative flex flex-row items-center space-x-1 hover:cursor-pointer"
           >
             <p>Giỏ hàng</p>
             <svg
@@ -193,6 +201,10 @@ const Navbar = () => {
               <path d="M8.5612 15.3407C8.34228 15.3407 8.13233 15.2535 7.97753 15.0982C7.82273 14.943 7.73576 14.7324 7.73576 14.5128H6.07715C6.07715 14.8395 6.14129 15.1629 6.26592 15.4646C6.39055 15.7664 6.57322 16.0406 6.8035 16.2715C7.03378 16.5025 7.30717 16.6857 7.60805 16.8107C7.90893 16.9357 8.23141 17 8.55707 17C8.88274 17 9.20522 16.9357 9.5061 16.8107C9.80698 16.6857 10.0804 16.5025 10.3106 16.2715C10.5409 16.0406 10.7236 15.7664 10.8482 15.4646C10.9729 15.1629 11.037 14.8395 11.037 14.5128H9.38612C9.38612 14.7323 9.29923 14.9428 9.14454 15.098C8.98985 15.2533 8.78003 15.3406 8.5612 15.3407Z"></path>
               <path d="M19.3299 1.64401C19.2849 1.63633 19.2393 1.63252 19.1937 1.63263H5.9867C5.76778 1.63263 5.55782 1.71985 5.40302 1.8751C5.24823 2.03035 5.16126 2.24092 5.16126 2.46047C5.16126 2.68003 5.24823 2.8906 5.40302 3.04585C5.55782 3.2011 5.76778 3.28832 5.9867 3.28832H18.2192L18.001 4.60149L16.8438 11.5668H6.07595L3.26946 4.60149L1.59537 0.482961C1.50684 0.289212 1.34721 0.13717 1.14972 0.0584856C0.952225 -0.020199 0.732083 -0.0194636 0.535118 0.0605389C0.338153 0.140541 0.179541 0.293646 0.0922992 0.487983C0.00505767 0.682319 -0.00409102 0.902913 0.0667575 1.10384L2.73963 7.68158L4.56385 12.5307C4.6985 12.9389 4.97657 13.2224 5.37794 13.2224H17.5428C17.7383 13.2225 17.9275 13.1531 18.0766 13.0264C18.2258 12.8997 18.3253 12.724 18.3574 12.5307L19.675 4.60149L20.0083 2.59655C20.0443 2.38002 19.993 2.15803 19.8658 1.9794C19.7386 1.80077 19.5458 1.68013 19.3299 1.64401Z"></path>
             </svg>
+
+            <div className="absolute bottom-[60%] left-[90%] flex h-[16px]  w-[16px] items-center justify-center rounded-full bg-primary_1 font-base_regular text-[8px] font-bold text-white">
+              <p className="group-hover:scale-125 group-hover:font-extraBold">{productsInCart.length}</p>
+            </div>
           </div>
 
           {/* AUTHENTICATION */}

@@ -1,31 +1,18 @@
-import Banner from "../components/Banner";
-import {
-  AboutUsReal,
-  Popular,
-  Showroom,
-  TryAtHome,
-  Announcement,
-} from "../components";
-import Marquee from "react-fast-marquee";
-import ChatBox from "../components/ChatBox";
-import { useState } from "react";
+import Banner from "../components/Home/Banner";
+import Popular from "../components/Common/Popular";
+import AboutUs from "../components/Home/AboutUs";
+// import ChatBox from "../components/ChatBox";
 
 const Home = () => {
-  const [showChatBox, setShowChatBox] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  // const [showChatBox, setShowChatBox] = useState(false);
 
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    setScrollPosition(scrollTop);
-  };
-  window.addEventListener("scroll", handleScroll);
   return (
     <div
       className="relative w-full flex flex-col 
     items-center  gap-10 mb-[100px]"
     >
       {/* CHAT BOX */}
-      <div className="fixed bottom-3 right-3 z-50">
+      {/* <div className="fixed bottom-3 right-3 z-50">
         {showChatBox ? (
           <ChatBox setShowChatBox={setShowChatBox} />
         ) : (
@@ -51,7 +38,7 @@ const Home = () => {
             </svg>
           </div>
         )}
-      </div>
+      </div> */}
 
       <div className="w-full">
         <Banner />
@@ -65,7 +52,7 @@ const Home = () => {
       </div>
 
       <Popular />
-      <AboutUsReal />
+      <AboutUs/>
       {/* {scrollPosition >= 1000 && <Showroom />} */}
 
       {/* {scrollPosition >= 1700 && <TryAtHome />} */}

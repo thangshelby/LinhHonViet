@@ -1,53 +1,51 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import { ShowProductList } from "../components";
+import ShowProductList from "../components/Common/ShowProductList";
 
 const Collection = () => {
   const category = useParams().category;
-  const options= [
-    'Giá: Thấp đến cao',
-    'Giá: Cao đến thấp',
-    'Tên: A-Z',
-    'Tên: Z-A',
-    'Mới nhất',
-    'Cũ nhất',
-    'Phổ biến nhất'
-  ]
+  const options = [
+    "Giá: Thấp đến cao",
+    "Giá: Cao đến thấp",
+    "Tên: A-Z",
+    "Tên: Z-A",
+    "Mới nhất",
+    "Cũ nhất",
+    "Phổ biến nhất",
+  ];
   return (
-    <div className="flex flex-col space-y-4 px-4 py-8 bg-[#f8f8f8]">
-      <h1 className="text-center text-[#222222] text-3xl uppercase font-semibold">
+    <div className="flex flex-col space-y-4 bg-[#f8f8f8] px-4 py-8">
+      <h1 className="text-center text-3xl font-semibold uppercase text-[#222222]">
         {category}
       </h1>
 
-      <div className="flex flex-row w-full items-center justify-between">
-        <h4 className="text-[#222222] font-thin">
+      <div className="flex w-full flex-row items-center justify-between">
+        <h4 className="font-thin text-[#222222]">
           Trang chủ / DANH MỤC <span className="font-medium">/ </span>{" "}
           <span className="font-bold"> {category}</span>
         </h4>
 
-        <div className="flex flex-row space-x-1 items-center tex-sm text-[#222222] font-raleway font-medium">
+        <div className="tex-sm flex flex-row items-center space-x-1 font-raleway font-medium text-[#222222]">
           <p>Sắp xếp : </p>
 
           <select
-            className="border-[1px] outline-none border-gray-300 bg-white  rounded-md px-2 py-1"
+            className="rounded-md border-[1px] border-gray-300 bg-white px-2 py-1 outline-none"
             name="sort"
             id="sort"
-
-            >
+          >
             {options.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
-            </select>
+          </select>
         </div>
       </div>
 
       <ShowProductList
-       productPerPage={4} 
-       isShownPagination={true} 
-       isShowNavigation={false}
-       />
+        productPerPage={12}
+        isShownPagination={true}
+        isShowNavigation={false}
+      />
     </div>
   );
 };

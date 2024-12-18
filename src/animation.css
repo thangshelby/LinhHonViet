@@ -2,10 +2,78 @@
   animation: cart_notification_in 100ms ease-in-out;
 }
 .fade-exit {
-    opacity: 1;
+  opacity: 1;
 }
 .fade-exit-active {
   transition: cart_notification_out 100ms ease-in-out;
+}
+
+.overview-cart {
+  top: 0;
+  right: 0;
+  position: fixed;
+  will-change: transform, opacity;
+}
+.overview-cart-enter {
+  transform: translateX(100%);
+  /* animation: overview-cart-enter 0.4s forwards; */
+}
+.overview-cart-enter-active {
+  transform: translateX(0%);
+  transition:
+    opacity 500ms,
+    transform 500ms;
+  /* animation: overview-cart-enter 0.4s forwards; */
+}
+.overview-cart-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.overview-cart-exit-active {
+  opacity: (0);
+  transform: translateX(100%);
+  transition:
+    opacity 500ms,
+    transform 500ms;
+
+  /* animation: overview-cart-out 0.4s forwards; */
+}
+
+
+.fade-in {
+  animation: fade-in 0.4s forwards;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 50;
+  }
+}
+@keyframes overview-cart-enter {
+  0% {
+    /* opacity: 0; */
+    transform: translateX(100%);
+  }
+  100% {
+    /* opacity: 100; */
+    transform: translateX(0%);
+  }
+}
+.overview-cart-out {
+  animation: overview-cart-out 2s forwards;
+}
+@keyframes overview-cart-out {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    /* opacity: 0; */
+    transform: translateX(100%);
+
+    /* transform: opacity(1); */
+  }
 }
 
 @keyframes cart_notification_in {

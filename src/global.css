@@ -4,7 +4,26 @@
 
 @import "tailwindcss/utilities";
 
+@font-face {
+  font-family: "FontThin";
+  src: url("/assets/fonts/base_thin.otf") format("opentype");
+}
+@font-face {
+  font-family: "FontThinItalic";
+  src: url("/assets/fonts/base_thin_italic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "FontRegularItalic";
+  src: url("/assets/fonts/base_regular_italic.otf") format("opentype");
+}
+@font-face {
+  font-family: "FontRegular";
+  src: url("/assets/fonts/base_regular.otf") format("opentype");
+}
+
 html {
+  display: inline-block;
   box-sizing: border-box;
   /* font-size: 62.5% */
 }
@@ -284,16 +303,31 @@ a {
   padding-top: 10px;
 }
 
-main::-webkit-scrollbar {
-  width: 0.25rem;
+::-webkit-scrollbar {
+  width: 6px; /* Chiều rộng cho thanh cuộn dọc */
+  height: 6px; /* Chiều cao cho thanh cuộn ngang */
 }
 
-main::-webkit-scrollbar-track {
-  background: #1e1e24;
+/* Định nghĩa phần nền của thanh cuộn */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 12px;
 }
 
-main::-webkit-scrollbar-thumb {
-  background: #6649b8;
+/* Định nghĩa phần tay cầm của thanh cuộn */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 12px;
+}
+
+/* Thay đổi màu sắc của tay cầm khi hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+  height: 6px;
 }
 
 .form_chat-box {
@@ -463,13 +497,12 @@ button:disabled {
     transform: translateX(-80%); /* Kết thúc ngoài cùng bên trái */
   }
 }
-.navbar{
-  animation: show-up-to-down 0.5s ease-in-out;  
+.navbar {
+  animation: show-up-to-down 0.5s ease-in-out;
 }
 
 @keyframes show-up-to-down {
   0% {
- 
     transform: translateY(-100%);
   }
   100% {
@@ -503,26 +536,105 @@ button:disabled {
   width: 100%;
 }
 
-
-
-/* .swiper{
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  list-style: none;
-  padding: 0;
-  z-index: 1; 
-}
-.swiper-pagination-bullet {
-  width: 16px !important; 
-  height: 16px !important; 
-  background-color: #702272 !important; 
-  border-radius: 50%; 
+/* input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: var(--thumb-color);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.swiper-pagination-bullet-active {
-  background-color: #ff6347 !important; 
-} 
- */
+input[type="range"]::-moz-range-thumb {
+  background: var(--thumb-color);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+} */
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: purple; /* Purple thumb color */
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: purple;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.table_in {
+  animation: table-in 0.5s ease-in-out;
+}
+.table_out {
+  animation: table-out 0.5s ease-in-out;
+}
+
+@keyframes table-out {
+  0% {
+    opacity: (100%);
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: (0%);
+    transform: translateY(80%);
+  }
+}
+
+@keyframes table-in {
+  0% {
+    opacity: (0%);
+    transform: translateY(80%);
+  }
+  100% {
+    opacity: (100%);
+    transform: translateY(0%);
+  }
+}
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+
+.input {  
+  outline: none;
+  background: #e8e8e8;
+  box-shadow:
+    1px 1px 6px #c8c8c8,
+    -1px -1px 6px #ffffff;
+  border: none;
+  border-radius: 2px;
+  transition: all 0.5s;
+}
+
+.input:focus {
+  background: #e8e8e8;
+  box-shadow:
+    inset 5px 5px 17px #c8c8c8,
+    inset -5px -5px 17px #ffffff;
+}

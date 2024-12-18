@@ -34,6 +34,12 @@ module.exports = {
         '465': '465px',
       },
       fontFamily: {
+        base_thin: ['FontThin', 'sans-serif'],
+        base_thin_italic: ['FontThinItalic', 'sans-serif'],
+        base_regular: ['FontRegular', 'sans-serif'],
+        base_regular_italic: ['FontRegularItalic', 'sans-serif'],
+
+        ganh:['Gagalon', 'sans-serif'],
         raleway:['Raleway', 'sans-serif'],
         inter: ['Inter  ht', 'sans-serif']
       },
