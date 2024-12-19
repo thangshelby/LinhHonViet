@@ -6,7 +6,7 @@
 // import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useEffect,useState } from "react";
 import { products } from "../../constants";
-import ProductCard from "../Cart/ProductCard";
+import ProductCard from "../Product/ProductCard";
 // import {QRCodeSVG} from 'qrcode.react';
 const ShowProductList = ({
 

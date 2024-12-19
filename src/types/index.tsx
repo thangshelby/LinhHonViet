@@ -86,3 +86,14 @@ export interface deliveryInfoType{
   ward:{id:number,name:string};
   note: string;
 }
+export interface LocationType{
+  country:string;
+  city:{
+    name:string;
+    id:number;
+  };
+  district:{
+    name:string;
+    id:number;
+  };
+}

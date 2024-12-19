@@ -1,195 +1,23 @@
-import  { useState } from "react";
-import { useCartStore } from "../store/store";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { products } from "../constants";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { MdOutlineDiscount } from "react-icons/md";
+import { useState } from "react";
+
+import CartRight from "../components/Cart/CartRight";
+import CartLeft from "../components/Cart/CartLeft";
 const Cart = () => {
-  const columns = ["Sản phẩm", "Giá", "Số lượng", "Tổng cộng"];
-  const { productsInCart } = useCartStore();
-  const [selectedSizeDelivery, setSelectedSizeDelivery] = useState<
+  const [selectedTypeDelivery, setSelectedTypeDelivery] = useState<
     null | number
   >(null);
 
   return (
     <div className="flex min-h-screen pt-12">
       <div className="flex w-[60%] flex-col border-r-[1px] border-gray-300 px-8 pb-12">
-        <table>
-          <thead>
-            <tr>
-              {columns.map((column, index) => (
-                <th
-                  key={index}
-                  className={`rounded-2xl border-b-[4px] border-gray-200 pb-2 ${index != columns.length - 1 ? "text-left" : "text-right"} font-base_regular font-semibold text-[#333]`}
-                >
-                  {column}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {productsInCart.map((product) => (
-              <tr>
-                <td className="flex flex-row items-center space-x-2 border-b-[1px] border-gray-300 py-10">
-                  <FaRegTrashAlt />
-
-                  <img
-                    src={products[0].image}
-                    className="h-24 w-24 rounded-sm object-center"
-                  />
-
-                  <p className="font-base_regular text-xs">
-                    {products[0].name} - {product.size}
-                  </p>
-                </td>
-                <td className="text-md border-b-[1px] border-gray-300 text-left font-raleway font-bold">
-                  {products[0].priceSale} VND
-                </td>
-                <td className="border-b-[1px] border-gray-300">
-                  <div className="flex flex-row">
-                    <div
-                      //  onClick={() => {
-                      //    if (quantity > 0) setQuantity(quantity - 1);
-                      //  }}
-                      className="flex items-center justify-center border-[1px] border-gray-300 bg-[#f9f9f9] p-1 px-3 hover:cursor-pointer hover:bg-gray-400"
-                    >
-                      <FaMinus size={6} color="black" />
-                    </div>
-                    <div className="flex items-center justify-center border-[1px] border-gray-300 bg-white p-1 px-3 shadow-xl">
-                      {/* {quantity} */} 0
-                    </div>
-                    <div
-                      //  onClick={() => {
-                      //    setQuantity(quantity + 1);
-                      //  }}
-                      className="flex items-center justify-center border-[1px] border-gray-300 bg-[#f9f9f9] p-1 px-3 hover:cursor-pointer hover:bg-gray-400"
-                    >
-                      <FaPlus size={6} color="black" />
-                    </div>
-                  </div>
-                </td>
-                <td className="text-md border-b-[1px] border-gray-300 text-right font-raleway font-bold">
-                  {products[0].priceSale} VND
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <CartLeft />
       </div>
 
-      <div className="flex w-[40%] flex-col space-y-6 px-8">
-        <h1 className="border-b-[4px] border-gray-200 pb-2 font-base_regular font-semibold text-[#333]">
-          Tổng cộng giỏ hàng
-        </h1>
-
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-row justify-between border-b-[1px] border-gray-300 py-1">
-            <h3 className="font-raleway text-[#333333]">Tạm tính</h3>
-            <p className="font-raleway font-extrabold">4.531.000 VND</p>
-          </div>
-          <h3 className="font-raleway text-[#333333]">Giao hàng</h3>
-
-          <div className="flex flex-col space-y-3 border-b-[1px] border-gray-300 py-2">
-            <div
-              onClick={() => {
-                setSelectedSizeDelivery(0);
-              }}
-              className="group flex flex-row items-center space-x-2"
-            >
-              <input
-                value={"checked"}
-                checked={selectedSizeDelivery == 0 ? true : false}
-                type="radio"
-                onChange={() => {
-                  setSelectedSizeDelivery(0);
-                }}
-              />
-              <label
-                htmlFor="delivery1"
-                className={`text-sm text-[#222222] ${selectedSizeDelivery != 0 && "opacity-60"} duration-500 group-hover:opacity-100`}
-              >
-                Đồng giá :{" "}
-                <span className="font-raleway text-sm font-bold">
-                  50.000 VND
-                </span>
-              </label>
-            </div>
-
-            <div
-              onClick={() => {
-                setSelectedSizeDelivery(1);
-              }}
-              className="group flex flex-row items-center space-x-2"
-            >
-              <input
-                checked={selectedSizeDelivery == 1 ? true : false}
-                type="radio"
-                onChange={() => {
-                  setSelectedSizeDelivery(1);
-                }}
-              />
-              <label
-                htmlFor="delivery1"
-                className={`text-sm text-[#222222] ${selectedSizeDelivery != 1 && "opacity-60"} duration-500 group-hover:opacity-100`}
-              >
-                Ship tỉnh :{" "}
-                <span className="font-raleway text-sm font-bold">
-                  50.000 VND
-                </span>
-              </label>
-            </div>
-
-            <div className="flex flex-row">
-              <div className="flex flex-row space-x-1 font-raleway text-sm text-[#222222]">
-                Vận chuyển đến{" "}
-                <p className="ml-[4px] font-extrabold text-[#666666]">
-                  {" "}
-                  Thành phố Hồ Chí Minh
-                </p>
-              </div>
-            </div>
-            <span className="font-raleway text-sm text-[#222222] hover:text-primary_1 hover:underline">
-              Đổi địa chỉ
-            </span>
-          </div>
-
-          <div className="flex flex-row items-center justify-between border-b-[4px] border-gray-200 pb-2 font-base_regular font-semibold text-[#333]">
-            Tổng
-            <p className="font-raleway font-extrabold text-black">
-              4.531.000 VND
-            </p>
-          </div>
-        </div>
-
-        <div className="w-full bg-primary_1 py-2 text-center font-base_regular font-semibold text-white hover:cursor-pointer hover:bg-primary_2">
-          Tiến hành thanh toán
-        </div>
-
-        <div className="flex flex-col space-y-4">
-          <div className="flex flex-row items-center space-x-2 font-raleway font-semibold">
-            <MdOutlineDiscount size={24} color="gray" />
-            <p>Phiếu ưu đãi</p>
-          </div>
-          <div className="bg-gray-200 py-[2px]" />
-
-          {/* <input
-            type="text"
-            placeholder="Nhập mã giảm giá"
-            // className="input"
-            className="bg-[#f5f5f5] p-2 text-xs font-thin shadow-md outline-none placeholder:font-base_thin_italic placeholder:text-xs focus:shadow-2xl"
-          /> */}
-
-          <input
-            placeholder="Nhập mã giảm giá"
-            className="input placeholder:text-base_regular px-4 py-2 font-base_thin_italic text-xs"
-            name="firstName"
-            type="text"
-          />
-
-          <div className="w-full bg-gray-200 py-2 text-center font-base_regular  text-black hover:cursor-pointer hover:bg-primary_2">
-            Áp dụng 
-          </div>
-        </div>
+      <div className="w-[40%]">
+        <CartRight
+          setSelectedTypeDelivery={setSelectedTypeDelivery}
+          selectedTypeDelivery={selectedTypeDelivery}
+        />
       </div>
     </div>
   );
