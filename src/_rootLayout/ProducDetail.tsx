@@ -1,12 +1,13 @@
-import { sizes } from "../../constants/index";
-import ShowProductList from "../../components/Common/ShowProductList";
-import SuggestSize from "../../components/ProductDetail/SuggestSize";
+import { sizes } from "../constants/index";
+import ShowProductList from "../components/Common/ShowProductList";
+import SuggestSize from "../components/ProductDetail/SuggestSize";
 // import useAuthContext from "../../hooks/useAuthContext";
 // import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { products } from "../../constants/index";
+import { products } from "../constants/index";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import { useCartStore, useToastStore } from "../../store/store";
+import { useEffect, useState, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+import { useCartStore, useToastStore } from "../store/store";
 import { useParams } from "react-router-dom";
 const ProducDetail = () => {
   // const { accessToken, user } = useAuthContext();
@@ -18,6 +19,7 @@ const ProducDetail = () => {
       .replace(/Đ/g, "D")
       .toLowerCase();
   }
+  const nodeRef = useRef(null);
   const params = useParams();
   const descriptions = [
     {
@@ -109,8 +111,35 @@ const ProducDetail = () => {
   // };
   return (
     <div className="relative mt-6 flex w-full flex-col items-center justify-center gap-10">
-      {isOpenSuggestSize && <SuggestSize />}
+      <div
+      onClick={()=>{
+        setIsOpenSuggestSize(false)
+      }}
+        className={`${isOpenSuggestSize ? "fixed" : "hidden"} ${isOpenSuggestSize && "inset-0 z-30 flex justify-end"} `}
+      >
+        <div
+          onClick={() => {
+            setIsOpenSuggestSize(false);
+          }}
+          className={`absolute h-full w-full bg-black/50`}
+        />
+      </div>
 
+      <CSSTransition
+        ref={nodeRef}
+        in={isOpenSuggestSize}
+        timeout={500}
+        classNames="suggest-size"
+        unmountOnExit={true}
+      >
+        <SuggestSize
+          isOpenSuggestSize={isOpenSuggestSize}
+          setIsOpenSuggestSize={() => {
+            setIsOpenSuggestSize(false);
+          }}
+          ref={nodeRef}
+        />
+      </CSSTransition>
       <div className="flex w-[95%] flex-row items-start justify-center gap-10 py-[20px]">
         {/* IMAGE SESSION */}
         <div className="flex w-[40%] flex-col space-y-4 px-1 py-2">

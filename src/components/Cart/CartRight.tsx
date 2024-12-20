@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { MdOutlineDiscount } from "react-icons/md";
 import SelectLocation from "./SelectLocation";
 import { LocationType } from "../../types";
+import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 const CartRight = ({
   setSelectedTypeDelivery,
@@ -10,6 +11,7 @@ const CartRight = ({
   setSelectedTypeDelivery: React.Dispatch<React.SetStateAction<number | null>>;
   selectedTypeDelivery: number | null;
 }) => {
+  const navigate = useNavigate();
   const [location, setLocation] = useState<LocationType>({
     country: "Vietnam",
     city: {
@@ -90,7 +92,7 @@ const CartRight = ({
               <p className="ml-[4px] font-extrabold text-[#666666]">
                 
                 {" "} {location.district.name!=''&& location.district.name}
-                {' '}
+                {', '}
                 {location.city.name}{" "}
               </p>
             </div>
@@ -137,7 +139,7 @@ const CartRight = ({
       >
         <div
           ref={subNodeRef}
-          className={`${showSelectLocation?'block': 'slide-down'} `}
+          className={` slide-down `}
         >
           <div className="flex flex-col space-y-4 ">
 
@@ -149,7 +151,11 @@ const CartRight = ({
             </p>
           </div>
 
-          <div className="w-full bg-primary_1 py-2 text-center font-base_regular font-semibold text-white hover:cursor-pointer duration-300 hover:bg-primary_2">
+          <div
+          onClick={()=>{
+            navigate('/payment')
+          }}
+          className="w-full bg-primary_1 py-2 text-center font-base_regular font-semibold text-white hover:cursor-pointer duration-300 hover:bg-primary_2">
             Tiến hành thanh toán
           </div>
 

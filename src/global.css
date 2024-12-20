@@ -25,7 +25,7 @@
 html {
   display: inline-block;
   box-sizing: border-box;
-  /* font-size: 62.5% */
+  font-size: 62.5%
 }
 
 @layer utilities {
@@ -96,50 +96,9 @@ html {
   .cart_notification {
     animation: cart_notification_in 0.3s ease-in-out;
   }
-  @keyframes cart_list {
-    0% {
-      transform: scale(0%);
-    }
-    100% {
-      transform: scale(100%);
-    }
-  }
-  @keyframes cart_notification_in {
-    0% {
-      transform: translateX(280px);
-    }
-    100% {
-      transform: translateX(0px);
-    }
-  }
+ 
 
-  @keyframes exit_bottom_to_top {
-    0% {
-      transform: translateY(50%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  }
-  @keyframes exit_top_to_bottom {
-    0% {
-      transform: translateY(-50%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  }
-
-  @keyframes identifier {
-    0% {
-      /* transform: translateY(0%); */
-      transform: scale(0);
-    }
-    100% {
-      /* transform: translateY(50%); */
-      transform: scale(1);
-    }
-  }
+  
   @layer flex {
     .col_center {
       display: flex;
@@ -172,41 +131,7 @@ a {
   text-decoration: none;
 }
 
-.gradient__bg {
-  background: -moz-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
 
-  /* safari 5.1+,chrome 10+ */
-  background: -webkit-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* opera 11.10+ */
-  background: -o-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* ie 10+ */
-  background: -ms-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* global 92%+ browsers support */
-  background: radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-}
 
 .gradient__text {
   background: var(--gradient-text);
@@ -426,7 +351,7 @@ button:disabled {
   padding: 2rem 1rem;
   border-radius: 0.2rem;
   width: 14rem;
-  animation: scale-up-to-down 0.3s ease-in-out;
+  animation: scale  -up-to-down 0.3s ease-in-out;
   box-shadow: #231f20;
 }
 .navbar__category__icon::after {
@@ -443,33 +368,16 @@ button:disabled {
 .right-to-left {
   animation: scale-right-to-left 0.4s ease-in-out;
 }
-.show-up-to-down {
-  animation: show-down-to-up 0.5s ease-in-out;
-}
+
 .category::before {
   content: "";
   position: absolute;
   top: -60px;
   padding: 30px 60px;
   left: 40%;
-  transform: translateX(-50%);
-  /* border: 10px solid transparent;
-  border-bottom-color: #212121;
-  background: #212121; */
+  transform: translateX(-50%)
 }
-@keyframes show-down-to-up {
-  0% {
-    /* -webkit-transform: scale(0.5);
-    transform: scale(0.5); */
-    /* Shrinks the element */
-    transform: translateY(10%);
-  }
-  100% {
-    transform: scale(1); /* Resets the size to normal */
 
-    transform: translateY(0%);
-  }
-}
 
 .marquee {
   position: relative;
@@ -625,8 +533,8 @@ input[type="range"]::-moz-range-thumb {
   outline: none;
   background: #e8e8e8;
   box-shadow:
-    1px 1px 6px #c8c8c8,
-    -1px -1px 6px #ffffff;
+    1px 1px 6 px #c8c8c8,
+    -1px -1px 6 px #ffffff;
   border: none;
   border-radius: 2px;
   transition: all 0.5s;
@@ -637,4 +545,56 @@ input[type="range"]::-moz-range-thumb {
   box-shadow:
     inset 5px 5px 17px #c8c8c8,
     inset -5px -5px 17px #ffffff;
+}
+
+
+
+.input-location {
+  border: 1px solid lightgrey;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+
+
+/* .input-location:active {
+  transform: scale(0.95);
+} */
+
+.input-location:focus {
+  box-shadow: 10px 10px 4px -10px;
+  /* box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.4); */
+  /* border: 2px solid grey; */
+}
+
+.custom-prev-button, 
+.custom-next-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.custom-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.custom-bullet {
+  width: 16px;
+  height: 16px;
+  background-color: #702272;
+  border-radius: 100%;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.custom-bullet.swiper-pagination-bullet-active {
+  background-color: #FF5722;
+  transform: scale(1.2);
 }

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/Common/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Common/Footer";
 import { useState, useRef } from "react";
 import OverviewCart from "../components/Cart/OverviewCart";
@@ -13,7 +13,7 @@ const RootLayout = () => {
     <div className={`relative h-screen w-full`}>
      
       <div
-        className={`${isOpenOverviewCart ? "fixed" : "hidden"} ${isOpenOverviewCart && "inset-0 z-30 flex justify-end"} `}
+        className={`${isOpenOverviewCart ? "fixed" : "hidden"} ${isOpenOverviewCart && "inset-0 z-30 flex "} `}
       >
         <div
           onClick={() => {

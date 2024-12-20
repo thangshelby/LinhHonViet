@@ -1,35 +1,60 @@
-import  { useState } from "react";
-import { sizes,bodyTypes  } from "../../constants";
+import { useState, useRef,useEffect, forwardRef } from "react";
+import { sizes, bodyTypes } from "../../constants";
 import "swiper/css";
+import { CSSTransition } from "react-transition-group";
 
-
-const SuggestSize = () => {
+const SuggestSize = forwardRef<
+  HTMLDivElement,
+  { isOpenSuggestSize: boolean; setIsOpenSuggestSize: () => void }
+>(({ isOpenSuggestSize, setIsOpenSuggestSize }, ref) => {
+  const nodeRef = useRef(null);
   const [selectedOption, setSelectedOption] = useState(0);
   const [selectedBodyType, setSelectedBodyType] = useState<number | null>(null);
   const [height, setHeight] = useState(155);
   const [weight, setWeight] = useState(48);
   const handleChangeHeight = (event: any) => setHeight(event.target.value);
-  const handleChangeWeight = (event: any) => setWeight(event.target.value);
+  const handleChangeWeight = (event: any) => setWeight(event.target.value)
+    useEffect(() => {
+      if (isOpenSuggestSize) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }, [isOpenSuggestSize]);;
+
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black bg-opacity-50">
-      <div className="relative flex h-[90%] w-[80%] flex-col rounded-2xl bg-white p-4 text-2xl">
+    <div
+    onClick={setIsOpenSuggestSize}
+      ref={ref}
+      className="fixed suggest-size left-0 top-0 z-40 flex h-screen w-full items-center justify-center"
+    >
+     
+
+      <div 
+      onClick={(e)=>{
+        e.stopPropagation();
+      }}
+      className="flex w-[80%] flex-col rounded-2xl bg-white p-4 text-2xl shadow-xl">
         <div className="flex w-[45%] flex-row rounded-3xl border-[1px] border-gray-300">
           <div
             onClick={() => setSelectedOption(0)}
-            className={`rounded-3xl ${selectedOption == 0 ? "bg-primary_1 text-white" : "text-gray-500"} font-base_regular w-[65%] from-purple-500 to-purple-700 py-3 text-center text-sm  font-medium transition-colors duration-300 hover:cursor-pointer `}
+            className={`rounded-3xl ${selectedOption == 0 ? "bg-primary_1 text-white" : "text-gray-500"} w-[65%] from-purple-500 to-purple-700 py-3 text-center font-base_regular text-sm font-medium transition-colors duration-300 hover:cursor-pointer`}
           >
             Hướng dẫn chọn size
           </div>
           <div
             onClick={() => setSelectedOption(1)}
-            className={`rounded-3xl ${selectedOption == 1 ? "bg-purple-900 text-white" : "text-gray-500"} font-base_regular w-[65%] from-purple-500 to-purple-700 py-3 text-center text-sm  font-medium transition-colors duration-300 hover:cursor-pointer `}
+            className={`rounded-3xl ${selectedOption == 1 ? "bg-purple-900 text-white" : "text-gray-500"} w-[65%] from-purple-500 to-purple-700 py-3 text-center font-base_regular text-sm font-medium transition-colors duration-300 hover:cursor-pointer`}
           >
             Bảng size
           </div>
         </div>
 
-        {selectedOption == 0 ? (
-          <div className="mt-6 flex flex-col space-y-3 px-4">
+        <div className="relative overflow-hidden pb-8">
+          <div className="z-10 mt-6 flex flex-col space-y-3 px-4">
             {/* HEIGHT SLIDER */}
             <div className="flex w-full flex-row items-center justify-center space-x-8 p-2">
               <h4 className="font-base_regular text-sm text-gray-800">
@@ -89,7 +114,7 @@ const SuggestSize = () => {
 
             {/* RESULT */}
             <div className="flex flex-col space-y-1">
-              <h4 className="font-base_regular mt-2 text-sm font-bold">
+              <h4 className="mt-2 font-base_regular text-sm font-bold">
                 Linh Hồn Việt gợi ý cho bạn
               </h4>
 
@@ -100,57 +125,67 @@ const SuggestSize = () => {
                 </p>
               ) : (
                 <div className="flex flex-row space-x-2">
-                  <div className="font-base_regular rounded-2xl bg-primary_1 px-4 py-2 text-sm text-white">
+                  <div className="rounded-2xl bg-primary_1 px-4 py-2 font-base_regular text-sm text-white">
                     L-Áo
                   </div>
-                  <div className="font-base_regular rounded-2xl bg-primary_1 px-4 py-2 text-sm text-white">
+                  <div className="rounded-2xl bg-primary_1 px-4 py-2 font-base_regular text-sm text-white">
                     XL- Quần
                   </div>
                 </div>
               )}
             </div>
           </div>
-        ) : (
-          <table
-            className={`table_in mt-6 min-w-full table-auto border-collapse`}
+
+          <CSSTransition
+            nodeRef={nodeRef}
+            classNames={"slide-up"}
+            timeout={500}
+            unmountOnExit={true}
+            in={selectedOption == 1}
           >
-            <thead className="z-20 overflow-hidden bg-purple-700 text-sm text-white">
-              <tr>
-                <th className="rounded-l-xl px-2 py-3">Size</th>
-                {sizes.map((size, index) => (
-                  <th
-                    key={size.size}
-                    className={`${index == sizes.length - 1 && "rounded-r-xl"} px-2 py-2`}
-                  >
-                    {size.size}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="rounded-2xl">
-              {Object.keys(sizes[0])
-                .slice(2)
-                .map((row, index) => (
-                  <tr key={index} className="text-center">
-                    <td className="font-base_regular overflow-hidden border-gray-300 text-sm font-medium">
-                      {row}
-                    </td>
+            <div ref={nodeRef} className="slide-up">
+              <table
+                className={`table_in mt-6 min-w-full table-auto border-collapse bg-white`}
+              >
+                <thead className="z-20 overflow-hidden bg-purple-700 text-sm text-white">
+                  <tr>
+                    <th className="rounded-l-xl px-2 py-3">Size</th>
                     {sizes.map((size, index) => (
-                      <td
-                        key={index}
-                        className="font-base_regular px-4 py-2 text-sm font-medium"
+                      <th
+                        key={size.size}
+                        className={`${index == sizes.length - 1 && "rounded-r-xl"} px-2 py-2`}
                       >
-                        {size[row as keyof typeof size]}
-                      </td>
+                        {size.size}
+                      </th>
                     ))}
                   </tr>
-                ))}
-            </tbody>
-          </table>
-        )}
+                </thead>
+                <tbody className="rounded-2xl">
+                  {Object.keys(sizes[0])
+                    .slice(2)
+                    .map((row, index) => (
+                      <tr key={index} className="text-center">
+                        <td className="overflow-hidden border-gray-300 font-base_regular text-sm font-medium">
+                          {row}
+                        </td>
+                        {sizes.map((size, index) => (
+                          <td
+                            key={index}
+                            className="px-4 py-2 font-base_regular text-sm font-medium"
+                          >
+                            {size[row as keyof typeof size]}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </CSSTransition>
+        </div>
       </div>
     </div>
   );
-};
+});
 
 export default SuggestSize;

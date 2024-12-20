@@ -11,13 +11,8 @@ interface OptionType {
   key: string;
 }
 
-const customRender = ({
-  options,
-  ...selectProps
-}: {
-  options: OptionType[];
-  selectProps: object;
-}) => {
+const customRender = (data: { options: OptionType[]; [key: string]: any }) => {
+  const { options, ...selectProps } = data;
   return (
     <Select
       sx={{
@@ -36,14 +31,14 @@ const customRender = ({
   );
 };
 
-interface DistrictDropDownProps {
+interface DistrictDropdownProps {
   className: string;
   district: string;
   value: string;
   data: { id: string; name: string }[];
   onChange: (district: string) => void;
 }
-class DistrictDropDown extends React.Component<DistrictDropDownProps> {
+class DistrictDropdown extends React.Component<DistrictDropdownProps> {
   render() {
     const { className, district, value, data, onChange } = this.props;
     return (
@@ -166,7 +161,7 @@ const SelectLocation = ({
           customRender={customRender}
         />
 
-        <DistrictDropDown
+        <DistrictDropdown
           className="w-[50%]"
           data={districts}
           district={location.district.name}

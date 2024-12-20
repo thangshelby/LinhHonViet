@@ -16,14 +16,12 @@
 }
 .overview-cart-enter {
   transform: translateX(100%);
-  /* animation: overview-cart-enter 0.4s forwards; */
 }
 .overview-cart-enter-active {
   transform: translateX(0%);
   transition:
     opacity 500ms,
     transform 500ms;
-  /* animation: overview-cart-enter 0.4s forwards; */
 }
 .overview-cart-exit {
   opacity: 1;
@@ -36,17 +34,13 @@
     opacity 500ms,
     transform 500ms;
 
-  /* animation: overview-cart-out 0.4s forwards; */
 }
 
 .fade-in {
   animation: fade-in 0.4s forwards;
 }
 
-.select-location {
-  /* display: flex; */
-}
-
+/* SLIDE RIGHT */
 .select-location-enter {
   transform: translateY(-100%);
   /* transform: scale(0); */
@@ -54,9 +48,7 @@
 }
 .select-location-enter-active {
   transform: translateY(0%);
-  /* transform: scale(1); */
   opacity: 1;
-
   transition: transform 1s;
 }
 .select-location-exit {
@@ -67,6 +59,7 @@
   transition: transform 1s;
 }
 
+/* SLIDE DOWN */
 .slide-down-enter {
   transform: translateY(-100%);
   opacity: 0;
@@ -77,6 +70,7 @@
   transition: transform 1s;
 }
 .slide-down-exit {
+  opacity: 1;
   transform: translateY(0%);
 }
 .slide-down-exit-active {
@@ -84,6 +78,93 @@
   transition: transform 1s;
 }
 
+/* SLIDE UP */
+.slide-up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.slide-up-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.slide-up-enter-active {
+  transform: translateY(0%);
+  opacity: 1;
+  transition: transform 0.5s;
+}
+.slide-up-exit {
+  transform: translateY(0%);
+}
+.slide-up-exit-active {
+  transform: translateY(100%);
+  transition: transform 0.5s;
+}
+
+/* SUGGEST SIZE */
+.suggest-size-enter {
+  transform: translate(100%, 100%);
+  /* transform: scale(0); */
+  opacity: 0;
+}
+.suggest-size-enter-active {
+  transform: translate(0%, 0%);
+  opacity: 1;
+  transition: transform 0.5s;
+}
+.suggest-size-exit {
+  transform: translate(0%, 0%);
+}
+.suggest-size-exit-active {
+  transform: translate(100%, 100%);
+  transition: transform 0.5s;
+}
+
+.image-banner {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.show-up-to-down {
+  animation: show-up-to-down 0.5s forwards;
+}
+@keyframes show-up-to-down {
+  0% {
+    transform-origin: top;
+    transform:scaleY(0);
+  }
+  100% {
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+}
+
+/* SHOW DOWN TO UP */
+.show-down-to-up {
+  animation: show-down-to-up 0.5s forwards;
+}
+@keyframes show-down-to-up {
+  0% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: scale(1); /* Resets the size to normal */
+
+    transform: translateY(0%);
+  }
+}
 
 @keyframes slide-down {
   0% {

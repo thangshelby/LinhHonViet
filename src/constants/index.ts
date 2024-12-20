@@ -40,52 +40,47 @@ export const navbarLinks = [
     title: "SẢN PHẨM",
     children: [
       { title: "TẤT CẢ SẢN PHẨM" },
-      { title: "TẤT CẢ SẢN PHẨM" },
-      { title: "TẤT CẢ SẢN PHẨM" },
-      { title: "TẤT CẢ SẢN PHẨM" },
+      { title: "SẢN PHẨM MỚI" },
+      { title: "SẢN PHẨM HOT" },
+      { title: "ÁO DÀI" },
+      { title: "QUẦN" },
+      { title: "PHỤ KIỆN" },
     ],
   },
   {
     title: "BÁN CHẠY NHẤT",
   },
-  {
-    title: "LINH HỒN VIỆT",
 
-    children: [
-      { title: "QUY TRÌNH CỦA CHÚNG TÔI" },
-      { title: "CHÍNH SÁCH CHO THUÊ" },
-    ],
-  },
   {
     title: "BỘ SƯU TẬP",
     children: [
       { title: "ÁO DÀI THU ĐÔNG" },
-      { title: "ÁO DÀI THU ĐÔNG" },
-      { title: "ÁO DÀI THU ĐÔNG" },
-      { title: "ÁO DÀI THU ĐÔNG" },
-      { title: "ÁO DÀI THU ĐÔNG" },
-      { title: "ÁO DÀI THU ĐÔNG" },
+      { title: "ÁO DÀI XUÂN HÈ" },
+      { title: "ÁO DÀI CÔ DÂU" },
+      { title: "ÁO DÀI CHÚ RỂ" },
+      { title: "ÁO DÀI TRẺ EM" },
+      { title: "ÁO DÀI NỮ SINH" },
+      { title: "ÁO DÀI NAM SINH" },
+      { title: "ÁO DÀI TRUYỀN THỐNG" },
+      { title: "ÁO DÀI CÁCH TÂN" },
+      { title: "ÁO DÀI DÀI" },
+      { title: "ÁO DÀI NGẮN" },
     ],
   },
   {
-    title: "GIỚI THIỆU",
-    children: [{ title: "VỀ CHÚNG TÔI" }, { title: "HỆ THỐNG KHÁCH HÀNG" }],
+    title: "VỀ LINH HỒN VIỆT",
+
+    children: [
+      { title: "QUY TRÌNH CỦA CHÚNG TÔI" },
+      { title: "CHÍNH SÁCH CHO THUÊ" },
+      { title: "HỆ THỐNG KHÁCH HÀNG" }
+    ],
   },
-  // {title:'THÊM SẢN PHẨM'}
-  // {
-  //   title: "VỀ CHÚNG TÔI",
-  //   children: [
-  //     { title: "SỨ MỆNH,TẦM NHÌN VÀ GIÁ TRỊ CỐT LÕI" },
-  //     { title: "" },
-  //     { title: "CÂU CHUYỆN VỀ CHÚNG TÔI " },
-  //     { title: "" },
-  //   ],
-  // },
 ];
 
 export const products = [
   {
-    id:1,
+    id: 1,
     name: "ÁO DÀI HỒNG UYỂN",
     path: "aodainusinh0",
     priceRent: "80.000",
@@ -106,7 +101,7 @@ export const products = [
     ],
   },
   {
-    id:2,
+    id: 2,
     name: "ÁO DÀI TỰ HÀ",
     path: "aonguthan0",
     priceRent: "150.000",
@@ -127,7 +122,7 @@ export const products = [
     ],
   },
   {
-    id:3,
+    id: 3,
     name: "ÁO DÀI HỒ UYỂN",
     path: "aonguthanvaitruot0",
     priceRent: "120.000",
@@ -148,7 +143,7 @@ export const products = [
     ],
   },
   {
-    id:4,
+    id: 4,
     name: "ÁO DÀI HỒNG UYỂN",
     path: "aodainusinh0",
     priceRent: "80.000",
@@ -169,7 +164,7 @@ export const products = [
     ],
   },
   {
-    id:5,
+    id: 5,
     name: "ÁO DÀI TỰ HÀ",
     path: "aonguthan0",
     priceRent: "150.000",
@@ -190,7 +185,7 @@ export const products = [
     ],
   },
   {
-    id:6,
+    id: 6,
     name: "ÁO DÀI HỒ UYỂN",
     path: "aonguthanvaitruot0",
     priceRent: "120.000",
@@ -211,7 +206,7 @@ export const products = [
     ],
   },
   {
-    id:1,
+    id: 1,
     name: "ÁO DÀI HỒNG UYỂN",
     path: "aodainusinh0",
     priceRent: "80.000",
@@ -232,7 +227,7 @@ export const products = [
     ],
   },
   {
-    id:2,
+    id: 2,
     name: "ÁO DÀI TỰ HÀ",
     path: "aonguthan0",
     priceRent: "150.000",
@@ -253,7 +248,7 @@ export const products = [
     ],
   },
   {
-    id:3,
+    id: 3,
     name: "ÁO DÀI HỒ UYỂN",
     path: "aonguthanvaitruot0",
     priceRent: "120.000",
@@ -274,7 +269,7 @@ export const products = [
     ],
   },
   {
-    id:1,
+    id: 1,
     name: "ÁO DÀI HỒNG UYỂN",
     path: "aodainusinh0",
     priceRent: "80.000",
@@ -295,7 +290,7 @@ export const products = [
     ],
   },
   {
-    id:2,
+    id: 2,
     name: "ÁO DÀI TỰ HÀ",
     path: "aonguthan0",
     priceRent: "150.000",
@@ -316,7 +311,7 @@ export const products = [
     ],
   },
   {
-    id:3,
+    id: 3,
     name: "ÁO DÀI HỒ UYỂN",
     path: "aonguthanvaitruot0",
     priceRent: "120.000",
@@ -337,7 +332,7 @@ export const products = [
     ],
   },
   {
-    id:1,
+    id: 1,
     name: "ÁO DÀI HỒNG UYỂN",
     path: "aodainusinh0",
     priceRent: "80.000",
@@ -358,7 +353,7 @@ export const products = [
     ],
   },
   {
-    id:2,
+    id: 2,
     name: "ÁO DÀI TỰ HÀ",
     path: "aonguthan0",
     priceRent: "150.000",
@@ -379,7 +374,7 @@ export const products = [
     ],
   },
   {
-    id:3,
+    id: 3,
     name: "ÁO DÀI HỒ UYỂN",
     path: "aonguthanvaitruot0",
     priceRent: "120.000",
@@ -400,7 +395,7 @@ export const products = [
     ],
   },
   {
-    id:1,
+    id: 1,
     name: "ÁO DÀI HỒNG UYỂN",
     path: "aodainusinh0",
     priceRent: "80.000",
@@ -421,7 +416,7 @@ export const products = [
     ],
   },
   {
-    id:2,
+    id: 2,
     name: "ÁO DÀI TỰ HÀ",
     path: "aonguthan0",
     priceRent: "150.000",
@@ -442,7 +437,7 @@ export const products = [
     ],
   },
   {
-    id:3,
+    id: 3,
     name: "ÁO DÀI HỒ UYỂN",
     path: "aonguthanvaitruot0",
     priceRent: "120.000",
