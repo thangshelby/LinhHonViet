@@ -4,9 +4,8 @@ import { FaAngleDown } from "react-icons/fa";
 import { useCartStore } from "../../store/store.tsx";
 import { CiMenuBurger } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
-import { useState,  useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 const NavbarMobile = ({
   setIsOpenOverviewCart,
 }: {
@@ -19,8 +18,6 @@ const NavbarMobile = ({
     null,
   );
   const subRef = useRef<HTMLDivElement>(null);
-
-
 
   return (
     <div className="relative flex h-[5rem] flex-row items-center justify-between bg-[#fcfcfc] px-[2rem] shadow-2xl">
@@ -55,27 +52,11 @@ const NavbarMobile = ({
                 {navbarLinks.map((category, index) => (
                   <div className="relative flex flex-col" key={index}>
                     <AnimatePresence>
-                      <motion.div
-                        // key={`${index}-${subCategoryActive}`}
-                        initial={{
-                          y:
-                            (subCategoryActive != null &&
-                            index > subCategoryActive)
-                              ? 0
-                              :'',
-                        }}
-                        animate={{
-                          y:
-                           ( subCategoryActive != null &&
-                            index > subCategoryActive)
-                              ? 0
-                              : '',
-                        }}
-
-                        transition={{ duration: 0.3 }}
+                      <div
                         className="flex flex-row justify-between space-x-[4rem] py-[1rem] text-[1.2rem]"
                       >
                         <p>{category.title}</p>
+
                         {category.children && (
                           <div
                             onClick={() => {
@@ -90,27 +71,19 @@ const NavbarMobile = ({
                             <FaAngleDown size={20} />
                           </div>
                         )}
-                      </motion.div>
+                      </div>
                     </AnimatePresence>
 
+                    {/* SUB NAVBAR CATEGORY */}
                     <AnimatePresence>
                       {category.children && subCategoryActive == index && (
                         <motion.div
                           ref={subRef}
-                          initial={{
-                            transform: "scaleY(0)",
-                            transformOrigin: "top",
-                          }}
-                          animate={{
-                            transform: "scaleY(1)",
-                            transformOrigin: "top",
-                          }}
-                          exit={{
-                            transform: "scaleY(0)",
-                            transformOrigin: "top",
-                          }}
-                          transition={{ duration: 0.3 }}
-                          className="relative  flex flex-col space-y-3 pl-[1.4rem]"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="relative flex flex-col space-y-3 pl-[1.4rem] overflow-hidden"
                         >
                           {category.children.map((subCate, index) => (
                             <div
@@ -118,7 +91,7 @@ const NavbarMobile = ({
                                 navigate(`/collection/${subCate.title}`);
                               }}
                               key={index}
-                              className="hover:underline"
+                              className="hover:underline opacity-80"
                             >
                               {subCate.title}
                             </div>
@@ -128,8 +101,6 @@ const NavbarMobile = ({
                     </AnimatePresence>
                   </div>
                 ))}
-
-              
               </motion.div>
             )}
           </AnimatePresence>
