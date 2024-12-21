@@ -14,7 +14,7 @@ const CartLeft = () => {
                {columns.map((column, index) => (
                  <th
                    key={index}
-                   className={`rounded-2xl border-b-[4px] border-gray-200 pb-2 ${index != columns.length - 1 ? "text-left" : "text-right"} font-base_regular font-semibold text-[#333]`}
+                   className={`rounded-2xl text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem]  border-b-[4px] border-gray-200 pb-2 ${index != columns.length - 1 ? "text-left" : "text-right"} font-base_regular font-semibold text-[#333]`}
                  >
                    {column}
                  </th>
@@ -36,7 +36,7 @@ const CartLeft = () => {
                      {products[0].name} - {product.size}
                    </p>
                  </td>
-                 <td className="text-md border-b-[1px] border-gray-300 text-left font-raleway font-bold">
+                 <td className="text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] border-b-[1px] border-gray-300 text-left font-raleway font-bold">
                    {products[0].priceSale} VND
                  </td>
                  <td className="border-b-[1px] border-gray-300">
@@ -62,7 +62,7 @@ const CartLeft = () => {
                      </div>
                    </div>
                  </td>
-                 <td className="text-md border-b-[1px] border-gray-300 text-right font-raleway font-bold">
+                 <td className="text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] border-b-[1px] border-gray-300 text-right font-raleway font-bold">
                    {products[0].priceSale} VND
                  </td>
                </tr>

@@ -29,16 +29,18 @@ const CartRight = ({
 
   return (
     <div className="relative flex flex-col space-y-6 px-8">
-      <h1 className="border-b-[4px] border-gray-200 pb-2 font-base_regular font-semibold text-[#333]">
+      <h1 className="border-b-[4px] border-gray-200 pb-2 font-base_regular text-[1.4rem] font-semibold text-[#333] md:text-[1.6rem] lg:text-[1.8rem]">
         Tổng cộng giỏ hàng
       </h1>
 
       <div className="flex w-full flex-col space-y-2">
-        <div className="flex flex-row justify-between border-b-[1px] border-gray-300 py-1">
-          <h3 className="font-raleway text-[#333333]">Tạm tính</h3>
+        <div className="flex flex-row justify-between border-b-[1px] border-gray-300 py-1 text-[1.4rem] md:text-[1.8rem] lg:text-[1.8rem]">
+          <h3 className="font-base_regular text-[#333333]">Tạm tính</h3>
           <p className="font-raleway font-extrabold">4.531.000 VND</p>
         </div>
-        <h3 className="font-raleway text-[#333333]">Giao hàng</h3>
+        <h3 className="font-raleway text-[1.4rem] text-[#333333] md:text-[1.6rem] lg:text-[1.8rem]">
+          Giao hàng
+        </h3>
 
         <div className="flex flex-col space-y-3 border-b-[1px] border-gray-300 py-2">
           <div
@@ -57,10 +59,12 @@ const CartRight = ({
             />
             <label
               htmlFor="delivery1"
-              className={`text-sm text-[#222222] ${selectedTypeDelivery != 0 && "opacity-60"} duration-500 group-hover:opacity-100`}
+              className={`text-[1.4rem] text-[#222222] md:text-[1.2rem] lg:text-[1.4rem] ${selectedTypeDelivery != 0 && "opacity-60"} text-[1.4rem] duration-500 group-hover:opacity-100 md:text-[1.2rem] lg:text-[1.4rem]`}
             >
               Đồng giá :{" "}
-              <span className="font-raleway text-sm font-bold">50.000 VND</span>
+              <span className="font-raleway text-[1.4rem] font-bold md:text-[1.2rem] lg:text-[1.4rem]">
+                50.000 VND
+              </span>
             </label>
           </div>
 
@@ -79,27 +83,29 @@ const CartRight = ({
             />
             <label
               htmlFor="delivery1"
-              className={`text-sm text-[#222222] ${selectedTypeDelivery != 1 && "opacity-60"} duration-500 group-hover:opacity-100`}
+              className={`text-[1.4rem] text-[#222222] md:text-[1.2rem] lg:text-[1.4rem] ${selectedTypeDelivery != 1 && "opacity-60"} text-[1.4rem] duration-500 group-hover:opacity-100 md:text-[1.2rem] lg:text-[1.4rem]`}
             >
               Ship tỉnh :{" "}
-              <span className="font-raleway text-sm font-bold">50.000 VND</span>
+              <span className="font-raleway text-[1.4rem] font-bold md:text-[1.2rem] lg:text-[1.4rem]">
+                50.000 VND
+              </span>
             </label>
           </div>
 
           <div className="flex flex-row">
-            <div className="flex flex-row space-x-1 font-raleway text-sm text-[#222222]">
-              Vận chuyển đến{" "}
+            <div className="flex flex-row space-x-1 font-raleway text-[1.4rem] text-[#222222] md:text-[1.2rem] lg:text-[1.4rem]">
+              Vận chuyển đến
               <p className="ml-[4px] font-extrabold text-[#666666]">
-                
-                {" "} {location.district.name!=''&& location.district.name}
-                {', '}
+                {" "}
+                {location.district.name != "" && location.district.name }
+            {' '}
                 {location.city.name}{" "}
               </p>
             </div>
           </div>
           <span
             onClick={() => setShowSelectLocation(!showSelectLocation)}
-            className="font-raleway text-sm text-[#222222] hover:cursor-pointer hover:text-primary_1 hover:underline"
+            className="font-raleway text-[1.4rem] text-[#222222] hover:cursor-pointer hover:text-primary_1 hover:underline md:text-[1.2rem] lg:text-[1.4rem]"
           >
             Đổi địa chỉ
           </span>
@@ -137,49 +143,44 @@ const CartRight = ({
         onEnter={() => setShowSelectLocation(true)}
         onExited={() => setShowSelectLocation(false)}
       >
-        <div
-          ref={subNodeRef}
-          className={` slide-down `}
-        >
-          <div className="flex flex-col space-y-4 ">
-
-        
-          <div className="slide-down flex flex-row items-center justify-between border-b-[4px] border-gray-200 pb-2 font-base_regular font-semibold text-[#333]">
-            Tổng
-            <p className="font-raleway font-extrabold text-black">
-              4.531.000 VND
-            </p>
-          </div>
-
-          <div
-          onClick={()=>{
-            navigate('/payment')
-          }}
-          className="w-full bg-primary_1 py-2 text-center font-base_regular font-semibold text-white hover:cursor-pointer duration-300 hover:bg-primary_2">
-            Tiến hành thanh toán
-          </div>
-
+        <div ref={subNodeRef} className={`slide-down`}>
           <div className="flex flex-col space-y-4">
-            <div className="flex flex-row items-center space-x-2 font-raleway font-semibold">
-              <MdOutlineDiscount size={24} color="gray" />
-              <p>Phiếu ưu đãi</p>
+            <div className="slide-down flex flex-row items-center justify-between border-b-[4px] border-gray-200 pb-2 font-base_regular text-[1.4rem] font-semibold text-[#333] md:text-[1.6rem] lg:text-[1.8rem]">
+              Tổng
+              <p className="font-raleway font-extrabold text-black">
+                4.531.000 VND
+              </p>
             </div>
-            <div className="bg-gray-200 py-[2px]" />
 
-            <input
-              placeholder="Nhập mã giảm giá"
-              className="input placeholder:text-base_regular px-4 py-2 font-base_thin_italic text-xs"
-              name="firstName"
-              type="text"
-            />
-
-            <div className="w-full bg-gray-200 py-2 text-center font-base_regular text-black hover:cursor-pointer duration-300 hover:bg-primary_2">
-              Áp dụng
+            <div
+              onClick={() => {
+                navigate("/payment");
+              }}
+              className="w-full bg-primary_1 py-2 text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-center font-base_regular font-semibold text-white duration-300 hover:cursor-pointer hover:bg-primary_2"
+            >
+              Tiến hành thanh toán
             </div>
-          </div>
+
+            <div className="flex flex-col space-y-4">
+              <div className="flex flex-row items-center space-x-2 font-base_regular_italic text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-semibold">
+                <MdOutlineDiscount size={24} color="gray" />
+                <p>Phiếu ưu đãi</p>
+              </div>
+              <div className="bg-gray-200 py-[2px]" />
+
+              <input
+                placeholder="Nhập mã giảm giá"
+                className="input placeholder:text-base_regular px-4 py-2 font-base_thin_italic *: text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem]"
+                name="firstName"
+                type="text"
+              />
+
+              <div className="w-full bg-gray-200 py-2 text-center font-base_regular text-black duration-300 hover:cursor-pointer text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] hover:bg-primary_2">
+                Áp dụng
+              </div>
+            </div>
           </div>
         </div>
-
       </CSSTransition>
     </div>
   );

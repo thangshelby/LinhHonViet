@@ -176,7 +176,7 @@ const SelectLocation = ({
         onClick={() => {
           setShowSelectLocation(false);
         }}
-        className="w-full bg-primary_1 py-2 text-center font-base_regular font-semibold text-white duration-300 hover:cursor-pointer hover:bg-primary_2"
+        className="w-full text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] bg-primary_1 py-2 text-center font-base_regular font-semibold text-white duration-300 hover:cursor-pointer hover:bg-primary_2"
       >
         Cập nhật
       </div>

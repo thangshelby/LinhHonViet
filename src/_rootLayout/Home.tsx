@@ -1,16 +1,12 @@
 import Banner from "../components/Home/Banner";
 import Popular from "../components/Common/Popular";
 import AboutUs from "../components/Home/AboutUs";
-// import ChatBox from "../components/ChatBox";
-
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   // const [showChatBox, setShowChatBox] = useState(false);
-
+  const navigate = useNavigate();
   return (
-    <div
-      className="relative w-full flex flex-col 
-    items-center  gap-10 mb-[100px]"
-    >
+    <div className="relative mb-[100px] flex w-full flex-col items-center gap-10">
       {/* CHAT BOX */}
       {/* <div className="fixed bottom-3 right-3 z-50">
         {showChatBox ? (
@@ -44,18 +40,20 @@ const Home = () => {
         <Banner />
       </div>
 
-      <div className="px-52 flex flex-col space-y-4 border-y-[1px] py-6 border-gray-300">
-        <h1 className="text-2xl raleway">SẢN PHẨM MỚI</h1>
-        <div className="bg-primary_1 text-center  text-white px-4 py-2">
+      <div className="flex flex-col space-y-4 border-y-[1px] border-gray-300 px-52 py-6">
+        <h1 className="font-base_regular_italic text-2xl">SẢN PHẨM MỚI</h1>
+        <div
+          onClick={() => {
+            navigate("/collection/all");
+          }}
+          className="bg-primary_1 hover:cursor-pointer px-4 py-2 text-center font-base_regular_italic text-white duration-300 hover:bg-primary_2"
+        >
           MUA NGAY
         </div>
       </div>
 
       <Popular />
-      <AboutUs/>
-      {/* {scrollPosition >= 1000 && <Showroom />} */}
-
-      {/* {scrollPosition >= 1700 && <TryAtHome />} */}
+      <AboutUs />
     </div>
   );
 };

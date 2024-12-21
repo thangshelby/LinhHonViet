@@ -16,10 +16,12 @@ const Banner = () => {
   };
 
   const handleSwipePrev = () => {
-    setCurrentImage((prev) => (prev - 1 + banerImages.length) % banerImages.length);
+    setCurrentImage(
+      (prev) => (prev - 1 + banerImages.length) % banerImages.length,
+    );
   };
 
-  let slideNextImage:any;
+  let slideNextImage: any;
 
   useEffect(() => {
     if (slideNextImage) {
@@ -27,7 +29,7 @@ const Banner = () => {
     }
     slideNextImage = setTimeout(() => {
       setCurrentImage((prev) => (prev + 1) % banerImages.length);
-    }, 8000);
+    },5000);
 
     return () => {
       clearTimeout(slideNextImage);
@@ -35,32 +37,29 @@ const Banner = () => {
   }, [currentImage]);
 
   return (
-    <div className="relative h-[30rem] sm:h-[40rem] md:h-[50rem] lg:h-[55rem] xl:h-[60rem] 2xl:h-[70rem] w-full">
+    <div className="group relative hover:cursor-pointer h-[30rem] w-full sm:h-[40rem] md:h-[50rem] lg:h-[55rem] xl:h-[60rem] 2xl:h-[70rem]">
       <div className="relative h-full w-full">
         <AnimatePresence>
-          {banerImages
-            .slice(currentImage, currentImage + 1)
-            .map((image) => (
-              <motion.img
-                key={image}
-                src={image}
-                alt="banner"
-                className="h-full w-full object-cover"
-                initial={{ opacity: 0.4,scale: 0.98 }}
-                animate={{ opacity: 1 ,scale: 1}}
-                // exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-              />
-            ))}
+          {banerImages.slice(currentImage, currentImage + 1).map((image) => (
+            <motion.img
+              key={image}
+              src={image}
+              alt="banner"
+              className="h-full w-full object-cover"
+              initial={{ opacity: 0.4, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+            />
+          ))}
         </AnimatePresence>
       </div>
 
       {/* Left Arrow */}
-      <div className="absolute top-0 left-0 h-full px-[1rem]">
-        <div className="h-full flex items-center">
+      <div className="absolute left-0 top-0 hidden h-full px-[1rem] duration-500 transition-all  group-hover:block">
+        <div className="flex h-full items-center">
           <div
             onClick={handleSwipePrev}
-            className="w-6 h-6 sm:w-8 sm:h-8 hover:cursor-pointer hover:text-primary_1"
+            className="h-6 w-6 hover:cursor-pointer hover:text-primary_1 sm:h-8 sm:w-8"
           >
             <svg
               className="flickity-button-icon fill-current"
@@ -76,11 +75,11 @@ const Banner = () => {
       </div>
 
       {/* Right Arrow */}
-      <div className="absolute top-0 right-0 h-full z-30 px-[1rem]">
-        <div className="h-full flex items-center">
+      <div className="absolute right-0 top-0 z-30 hidden h-full px-[1rem] duration-500 transition-all  group-hover:block">
+        <div className="flex h-full items-center">
           <div
             onClick={handleSwipeNext}
-            className="w-6 h-6 sm:w-8 sm:h-8 hover:cursor-pointer hover:text-primary_1"
+            className="h-6 w-6 hover:cursor-pointer hover:text-primary_1 sm:h-8 sm:w-8"
           >
             <svg
               className="flickity-button-icon fill-current"
@@ -105,7 +104,7 @@ const Banner = () => {
               key={index}
               className={`${
                 index === currentImage ? "bg-white" : "bg-gray-500 opacity-50"
-              } rounded-full w-2 h-2 sm:w-3 sm:h-3 hover:cursor-pointer`}
+              } h-2 w-2 rounded-full hover:cursor-pointer sm:h-3 sm:w-3`}
             ></div>
           ))}
         </div>

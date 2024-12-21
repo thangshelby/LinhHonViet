@@ -19,7 +19,7 @@ const ProductCard = ({ product }: { product: any }) => {
   };
   return (
     <div
-      className={`parent hover:boder-gray-100 flex flex-col space-y-3 pb-6 duration-700 hover:cursor-pointer hover:border-[1px] hover:shadow-2xl`}
+      className={`parent hover:boder-gray-100 w-full flex flex-col space-y-[1.2rem] pb-6 duration-700 hover:cursor-pointer hover:border-[1px] hover:shadow-2xl`}
     >
       <div
         onClick={() => {
@@ -46,14 +46,14 @@ const ProductCard = ({ product }: { product: any }) => {
           onClick={() => {
             handleChangePath(product.name);
           }}
-          className="font-raleway text-lg text-[#333] hover:cursor-pointer hover:font-medium hover:text-primary_1"
+          className="font-raleway sm:text-[1.2rem] md:text-[1.8rem] text-[#333] hover:cursor-pointer hover:font-medium hover:text-primary_1"
         >
           {product.name && product.name?.length >= 20
             ? product.name.slice(0, 20) + " ..."
             : product.name}
         </p>
 
-        <p className="text-[15p x] mb-2 font-raleway font-semibold text-[#111111]">
+        <p className="text-[1.2rem] md:text-[1.4rem] mb-2 font-raleway font-semibold text-[#111111]">
           <bdi>
             <span className="font-bold">{product.priceSale} VND</span>
           </bdi>
@@ -62,7 +62,7 @@ const ProductCard = ({ product }: { product: any }) => {
           onClick={() => {
             handleChangePath(product.name);
           }}
-          className="hover:bg- rounded-sm bg-[#e9e6ed] px-4 py-1 font-thin text-[#282523] hover:bg-[#dbd9de]"
+          className="text-[1.2rem] md:text-[1.4rem] rounded-sm bg-[#e9e6ed] px-4 py-1 font-thin text-[#282523] hover:bg-[#dbd9de]"
         >
           Xem chi tiết
         </div>

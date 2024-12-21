@@ -8,12 +8,12 @@ const Cart = () => {
   >(null);
 
   return (
-    <div className="flex min-h-screen pt-12">
-      <div className="flex w-[60%] flex-col border-r-[1px] border-gray-300 px-8 pb-12">
+    <div className="flex flex-col md:flex-row min-h-screen pt-12">
+      <div className="flex w-full md:w-[60%] flex-col md:border-r-[1px] md:border-gray-300 px-8 pb-12">
         <CartLeft />
       </div>
 
-      <div className="w-[40%]">
+      <div className=" w-full md:w-[40%]">
         <CartRight
           setSelectedTypeDelivery={setSelectedTypeDelivery}
           selectedTypeDelivery={selectedTypeDelivery}

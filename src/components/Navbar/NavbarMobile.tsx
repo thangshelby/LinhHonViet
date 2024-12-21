@@ -6,6 +6,8 @@ import { CiMenuBurger } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { IoIosClose } from "react-icons/io";
+
 const NavbarMobile = ({
   setIsOpenOverviewCart,
 }: {
@@ -31,6 +33,7 @@ const NavbarMobile = ({
           >
             <CiMenuBurger size={20} />
           </div>
+
           <AnimatePresence>
             {isOpenNavbar && (
               <motion.div
@@ -47,14 +50,20 @@ const NavbarMobile = ({
                   transformOrigin: "top",
                 }}
                 transition={{ duration: 0.5 }}
-                className="absolute left-0 top-[100%] z-50 bg-[#fcfcfc] p-6 font-base_regular font-bold text-[#222222]"
+                className="absolute left-0 top-[100%] z-20 bg-[#fcfcfc] p-6 font-base_regular font-bold text-[#222222]"
               >
+                <div
+                onClick={()=>{
+                  setIsOpenNavbar(false)
+                }}
+                className="w-full flex absolute top-0 right-6  items-center justify-end ">
+                  <IoIosClose size={20} />
+                </div>
+
                 {navbarLinks.map((category, index) => (
                   <div className="relative flex flex-col" key={index}>
                     <AnimatePresence>
-                      <div
-                        className="flex flex-row justify-between space-x-[4rem] py-[1rem] text-[1.2rem]"
-                      >
+                      <div className="flex flex-row justify-between space-x-[4rem] py-[1rem] text-[1.2rem]">
                         <p>{category.title}</p>
 
                         {category.children && (
@@ -80,10 +89,10 @@ const NavbarMobile = ({
                         <motion.div
                           ref={subRef}
                           initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
+                          animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="relative flex flex-col space-y-3 pl-[1.4rem] overflow-hidden"
+                          className="relative flex flex-col space-y-3 overflow-hidden pl-[1.4rem]"
                         >
                           {category.children.map((subCate, index) => (
                             <div
@@ -91,7 +100,7 @@ const NavbarMobile = ({
                                 navigate(`/collection/${subCate.title}`);
                               }}
                               key={index}
-                              className="hover:underline opacity-80"
+                              className="opacity-80 hover:underline"
                             >
                               {subCate.title}
                             </div>

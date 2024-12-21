@@ -37,8 +37,8 @@ const NavbarDesktop = ({
                 />
               )}
               {category.children && (
-                <div className="absolute left-0 top-[100%] z-50">
-                  <div className="show-up-to-down z-50 hidden flex-col justify-center space-y-4 border-t-[1px] border-black bg-[#fcfcfc] p-6 pr-[4rem] font-base_regular font-normal text-[#222222] group-hover:flex group-hover:flex-1">
+                <div className="absolute left-0 top-[100%] z-30">
+                  <div className="show-up-to-down z-30 hidden flex-col justify-center space-y-4 border-t-[1px] border-black bg-[#fcfcfc] p-6 pr-[4rem] font-base_regular font-normal text-[#222222] group-hover:flex group-hover:flex-1">
                     {category.children.map((subCate, index) => (
                       <div
                         onClick={() => {

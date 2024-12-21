@@ -25,10 +25,10 @@ const OverviewCart = forwardRef<
     <div
       ref={ref}
       onClick={(e) => e.stopPropagation()}
-      className={`overview-cart z-50 flex h-full w-[35%] flex-col items-center bg-white py-6`}
+      className={`overview-cart z-50 flex h-full  w-[60%] md:w-[45%] lg:w-[35%] flex-col items-center bg-white py-[2.4rem]`}
     >
       <div className="flex w-full flex-row items-center justify-between pb-4">
-        <h1 className="px-8 font-base_regular text-lg font-bold uppercase">
+        <h1 className="px-[3.2rem] font-base_regular text-[1.2rem] md:text-[1.6rem] lg:text-[1.8rem] font-bold uppercase">
           Giỏ hàng ( {productsInCart.length} )
         </h1>
         <div
@@ -54,26 +54,26 @@ const OverviewCart = forwardRef<
               ))}
             </div>
             <div className="flex h-[40%] w-full flex-col space-y-2 bg-[#f5f5f5] p-6 px-16">
-              <h1 className="font-base_regular">Tổng cộng</h1>
+              <h1 className="font-base_regular text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem]">Tổng cộng</h1>
               <div
                 onClick={() => {
                   navigate("/cart");
-                  setIsOpenOverviewCart();
+                  setIsOpenOverviewCart();  
                 }}
-                className="bg-primary_1 px-6 py-1 text-center font-base_regular font-bold text-white hover:cursor-pointer hover:bg-primary_3"
+                className="bg-primary_1 px-[2.4rem]  py-[0.4rem] text-center text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-base_regular font-bold text-white hover:cursor-pointer hover:bg-primary_3"
               >
                 Xem giỏ hàng
               </div>
               <div
                 onClick={setIsOpenOverviewCart}
-                className="bg-primary_1 px-6 py-1 text-center font-base_regular font-bold text-white hover:cursor-pointer hover:bg-primary_3"
+                className="bg-primary_1 px-[2.4rem]  py-[0.4rem] text-center text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-base_regular font-bold text-white hover:cursor-pointer hover:bg-primary_3"
               >
                 Thanh toán
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center space-y-6 px-6 py-12 font-base_regular_italic">
+          <div className="flex flex-col items-center justify-center space-y-6 px-[2.4rem]  py-12 font-base_regular_italic">
             <svg
               width="70"
               height="80"
@@ -110,16 +110,16 @@ const OverviewCart = forwardRef<
                 fill="#DEDEDE"
               ></path>
             </svg>
-            <span className="font-base_regular text-lg font-medium">
+            <span className="font-base_regular text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] font-medium">
               Giỏ hàng của bạn đang trống.
             </span>
-            <p>
+            <p className="text-[1.2rem] md:text-[1.4rem] lg:text-[1.6rem] px-[0.8rem]">
               Bạn có thể xem tất cả các sản phẩm có sẵn và mua một số sản phẩm
               tại cửa hàng.
             </p>
             <div
               onClick={setIsOpenOverviewCart}
-              className="bg-primary_1 px-10 py-3 text-center text-white hover:cursor-pointer hover:bg-primary_3"
+              className="bg-primary_1 px-[4rem] py-[1.2rem] text-center  text-[1.2rem] md:text-[1.6rem] lg:text-[1.8rem] text-white hover:cursor-pointer hover:bg-primary_3"
             >
               Quay lại cửa hàng
             </div>
