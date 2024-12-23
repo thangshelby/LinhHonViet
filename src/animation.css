@@ -140,6 +140,15 @@
 .show-up-to-down {
   animation: show-up-to-down 0.5s forwards;
 }
+
+
+
+
+.gradient-icon {
+
+  background: linear-gradient(45deg, #4267B2, #00c6ff);
+
+}
 @keyframes show-up-to-down {
   0% {
     transform-origin: top;

@@ -37,9 +37,14 @@ const Navbar = ({
 
       {/* NAVAR DESKTOP AND MOBILE */}
       {windowWidth&& windowWidth <= 960 ? (
-        <NavbarMobile setIsOpenOverviewCart={setIsOpenOverviewCart} />
+        <NavbarMobile
+        scrollTop={scrollTop}
+        setIsOpenOverviewCart={setIsOpenOverviewCart} />
       ) : (
-        <NavbarDesktop setIsOpenOverviewCart={setIsOpenOverviewCart} />
+        <NavbarDesktop
+        scrollTop={scrollTop}
+        
+        setIsOpenOverviewCart={setIsOpenOverviewCart} />
       )}
     </div>
   );

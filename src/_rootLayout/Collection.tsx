@@ -16,7 +16,7 @@ const Collection = () => {
 
 
   return (
-    <div className="flex flex-col space-y-4 bg-[#f8f8f8] px-4 py-8">
+    <div className="flex flex-col space-y-4 bg-[#f8f8f8] px-[1.6rem] py-8">
       <h1 className="text-center text-3xl font-semibold font-base_regular uppercase text-[#222222]">
         {category}
       </h1>
@@ -26,7 +26,7 @@ const Collection = () => {
           Trang chủ / DANH MỤC <span className="font-medium">/ </span>{" "}
           <span className="font-bold"> {category}</span>
         </h4>
-
+    
         <div className="tex-sm flex flex-row items-center space-x-1  font-raleway font-medium text-[#222222]">
           <p>Sắp xếp : </p>
 
@@ -45,7 +45,6 @@ const Collection = () => {
       </div>
 
       <ShowProductList
-        productPerPage={12}
         isShownPagination={true}
         isShowNavigation={false}
       />

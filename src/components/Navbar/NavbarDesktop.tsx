@@ -5,14 +5,18 @@ import { useCartStore } from "../../store/store.tsx";
 
 const NavbarDesktop = ({
   setIsOpenOverviewCart,
+  scrollTop,
 }: {
   setIsOpenOverviewCart: () => void;
+  scrollTop: number;
 }) => {
   const navigate = useNavigate();
   const { productsInCart } = useCartStore();
 
   return (
-    <div className="relative flex flex-row items-center justify-between bg-[#fcfcfc] px-[2rem] shadow-2xl md:px-[1rem]">
+    <div
+      className={`relative flex flex-row items-center justify-between bg-[#fcfcfc] px-[2rem] ${scrollTop >= 200 && "shadow-2xl"} md:px-[1rem]`}
+    >
       {/* ICON AND CATEGORY */}
       <div className="flex h-[7rem] flex-row items-center justify-center hover:cursor-pointer">
         <img

@@ -38,7 +38,7 @@ const DistrictDropdown: React.FC<DistrictDropdownProps> = ({
     <select className={className} {...register("location.district")}>
       {!district && <option value="">Quận/Huyện</option>}
       {data.map((item) => (
-        <option value={item.name} key={item.id}>
+        <option className="text-[1.4rem] md:text-[1.2rem] lg:text-[1.4rem]" value={item.name} key={item.id}>
           {item.name}
         </option>
       ))}
@@ -129,7 +129,7 @@ const PaymentLeft = () => {
 
   return (
     <div className="flex flex-col space-y-6 border-t-[2px] border-gray-200 py-8">
-      <h1 className="text-md font-base_regular font-bold">
+      <h1 className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.4rem] font-base_regular font-bold">
         Thông tin thanh toán
       </h1>
       <form
@@ -138,35 +138,35 @@ const PaymentLeft = () => {
       >
         <div className="flex w-full flex-row space-x-6">
           <div className="flex flex-1 flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Họ</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <input
               {...register("first_name", { required: true })}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[2rem] text-sm"
             />
           </div>
           <div className="flex flex-1 flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Tên</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <input
               {...register("last_name", { required: true })}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[1.4rem] text-sm"
             />
           </div>
         </div>
 
-        <div className="flex w-full flex-row space-x-4">
+        <div className="flex w-full flex-row space-x-[1rem]">
           <div className="flex w-[33%] flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Quốc gia/ Khu vực</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <CountryDropdown
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60  text-sm"
               value={location.country}
               onChange={(country) => {
                 setLocation({ ...location, country });
@@ -175,14 +175,14 @@ const PaymentLeft = () => {
           </div>
 
           <div className="flex w-[33%] flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Tỉnh/ Thành phố</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <RegionDropdown
               country={location.country}
               value={location.city.name}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[1.4rem] text-sm"
               onChange={(region) => {
                 setLocation({ ...location, city: { name: region, id: 0 } });
               }}
@@ -190,13 +190,13 @@ const PaymentLeft = () => {
           </div>
 
           <div className="flex w-[33%] flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Quận/ Huyện</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <DistrictDropdown
               register={register}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[1.4rem] text-sm"
               data={districts}
               district={location.district.name}
               value={location.country}
@@ -210,45 +210,46 @@ const PaymentLeft = () => {
           </div>
         </div>
 
-        <div className="flex w-full flex-row space-x-6">
-          <div className="flex flex-1 flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+        <div className="flex w-full flex-row space-x-[1rem]  ">
+          <div className="flex w-[32.5%] flex-col">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Địa chỉ</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <input
               {...register("address", { required: true })}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[1.4rem] text-sm"
             />
           </div>
-          <div className="flex flex-1 flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+          <div className="flex w-[32.5%] flex-col">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Số điện thoại</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <input
               {...register("phone", { required: true })}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[1.4rem] text-sm"
             />
           </div>
-          <div className="flex flex-1 flex-col">
-            <label className="flex flex-row items-start space-x-1 font-raleway font-normal text-[#222222]">
+          <div className="flex w-[32.5%] flex-col">
+            <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.6rem] opacity-90 flex flex-row items-start space-x-[0.4rem] font-raleway font-normal text-[#222222]">
               <p>Địa chỉ Email</p>
               <FaAsterisk className="mt-[6px] text-[4px] text-[#FF2626]" />
             </label>
             <input
               {...register("email", { required: true })}
-              className="input-location rounded-md p-2 text-sm"
+              className="input-location rounded-md px-[1rem] py-[0.6rem] text-[1.7rem]  opacity-60 placeholder:text-[1.4rem] text-sm"
             />
           </div>
         </div>
 
         <div className="flex flex-col space-y-2">
-          <label className="font-base_regular text-sm font-bold">
+          <label className="text-[1.4rem]  md:text-[1.2rem] lg:text-[1.4rem] font-bold opacity-90 font-base_regular   ">
             Ghi chú đơn hàng (tùy chọn)
           </label>
           <textarea
-            className="input-location h-24 rounded-md text-sm"
+          placeholder="Vd: Giao hàng vào buổi sáng, không gọi trước khi giao hàng"
+            className="input-location h-[8.4rem] p-[1rem] rounded-md text-[1.4rem]  md:text-[1.2rem] lg:text-[1.4rem]"
             {...register("note")}
           />
         </div>

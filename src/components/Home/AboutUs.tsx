@@ -32,7 +32,7 @@ const AboutUs = () => {
             {images.map((image, index) => (
               <div
                 onClick={() => setCurrentImage(index)}
-                key={index}
+                key={index+image}
                 className={`${
                   index === currentImage ? "bg-white" : "bg-gray-500 opacity-50"
                 } h-3 w-3 rounded-full hover:cursor-pointer sm:h-3 sm:w-3`}
@@ -44,7 +44,7 @@ const AboutUs = () => {
 
       <div className="flex-full flex flex-col items-center md:w-[60%]">
         <div className="flex flex-col items-center justify-center space-y-6 p-10 px-20">
-          <h1 className="font-base_regular text-[2rem] font-medium text-white">
+          <h1 className="font-base_regular  text-[2rem]  md:text-[1.6rem] lg:text-[2rem] font-medium text-white">
             VỀ CHÚNG TÔI
           </h1>
           <div className="relative pt-[1.2rem] px-[1.2rem]">
@@ -73,8 +73,11 @@ const AboutUs = () => {
           </div>
         </div>
         <div
-          onClick={() => navigate("/about-us")}
-          className="z-10 rounded-lg bg-[#353535] px-[2rem] py-[0.4rem] text-[1.6rem] font-[400] text-[#f1f1f1] duration-300 hover:cursor-pointer hover:bg-white hover:text-primary_1 md:text-[1.6rem] lg:text-[2rem]"
+          onClick={() => 
+            {
+              window.scrollTo(0, 0);
+              navigate("/about-us")}}
+          className="z-10 rounded-lg bg-[#353535] px-[2rem] py-[0.8rem] text-[1.6rem] font-[400] text-[#f1f1f1] duration-300 hover:cursor-pointer hover:bg-white hover:text-primary_1 md:text-[1.6rem] lg:text-[2rem]"
         >
           XEM THÊM
         </div>

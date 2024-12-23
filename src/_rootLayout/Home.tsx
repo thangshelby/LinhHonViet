@@ -40,13 +40,15 @@ const Home = () => {
         <Banner />
       </div>
 
-      <div className="flex flex-col space-y-4 border-y-[1px] border-gray-300 px-52 py-6">
-        <h1 className="font-base_regular_italic text-2xl">SẢN PHẨM MỚI</h1>
+      <div className="flex flex-col space-y-4  border-y-[0.1rem] md:border-y-[0.15rem] border-gray-300 px-[12%] py-[2.4rem]">
+        <h1 className="font-base_regular_italic text-[1.6rem] md:text-[1.8rem] lg:text-[2rem]">
+          SẢN PHẨM MỚI
+        </h1>
         <div
           onClick={() => {
             navigate("/collection/all");
           }}
-          className="bg-primary_1 hover:cursor-pointer px-4 py-2 text-center font-base_regular_italic text-white duration-300 hover:bg-primary_2"
+          className="bg-primary_1 px-[1.2rem] py-[0.4rem] text-center font-base_regular_italic text-[1.4rem] text-white duration-300 hover:cursor-pointer hover:bg-primary_2 md:text-[1.6rem] lg:text-[1.8rem]"
         >
           MUA NGAY
         </div>

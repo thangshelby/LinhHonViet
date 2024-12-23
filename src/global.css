@@ -598,3 +598,8 @@ input[type="range"]::-moz-range-thumb {
   background-color: #FF5722;
   transform: scale(1.2);
 }
+/* "test": "react-scripts test --watchAll --coverage",
+"eject": "react-scripts eject" */
+.testimonial-layer{
+  background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)
+}

@@ -9,8 +9,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IoIosClose } from "react-icons/io";
 
 const NavbarMobile = ({
+  scrollTop,
   setIsOpenOverviewCart,
 }: {
+  scrollTop: number;
   setIsOpenOverviewCart: () => void;
 }) => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const NavbarMobile = ({
   const subRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative flex h-[5rem] flex-row items-center justify-between bg-[#fcfcfc] px-[2rem] shadow-2xl">
+    <div className={`relative flex h-[5rem] flex-row items-center justify-between bg-[#fcfcfc] px-[2rem] ${scrollTop>200&&'shadow-2xl'}`}>
       {/* ICON AND CATEGORY */}
       <div className="flex h-full flex-row items-center">
         <div className="relative flex h-full items-center whitespace-nowrap px-[1rem] hover:cursor-pointer">
@@ -53,35 +55,34 @@ const NavbarMobile = ({
                 className="absolute left-0 top-[100%] z-20 bg-[#fcfcfc] p-6 font-base_regular font-bold text-[#222222]"
               >
                 <div
-                onClick={()=>{
-                  setIsOpenNavbar(false)
-                }}
-                className="w-full flex absolute top-0 right-6  items-center justify-end ">
+                  onClick={() => {
+                    setIsOpenNavbar(false);
+                  }}
+                  className="absolute right-6 top-0 flex w-full items-center justify-end"
+                >
                   <IoIosClose size={20} />
                 </div>
 
                 {navbarLinks.map((category, index) => (
                   <div className="relative flex flex-col" key={index}>
-                    <AnimatePresence>
-                      <div className="flex flex-row justify-between space-x-[4rem] py-[1rem] text-[1.2rem]">
-                        <p>{category.title}</p>
+                    <div className="flex flex-row justify-between space-x-[4rem] py-[1rem] text-[1.2rem]">
+                      <p>{category.title}</p>
 
-                        {category.children && (
-                          <div
-                            onClick={() => {
-                              if (subCategoryActive == index) {
-                                setSubCategoryActive(null);
-                              } else {
-                                setSubCategoryActive(index);
-                              }
-                            }}
-                            className={`${subCategoryActive == index && "rotate-180"} duration-500`}
-                          >
-                            <FaAngleDown size={20} />
-                          </div>
-                        )}
-                      </div>
-                    </AnimatePresence>
+                      {category.children && (
+                        <div
+                          onClick={() => {
+                            if (subCategoryActive == index) {
+                              setSubCategoryActive(null);
+                            } else {
+                              setSubCategoryActive(index);
+                            }
+                          }}
+                          className={`${subCategoryActive == index && "rotate-180"} duration-500`}
+                        >
+                          <FaAngleDown size={20} />
+                        </div>
+                      )}
+                    </div>
 
                     {/* SUB NAVBAR CATEGORY */}
                     <AnimatePresence>

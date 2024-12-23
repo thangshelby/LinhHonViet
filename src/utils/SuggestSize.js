@@ -35,7 +35,7 @@ const sizeData = {
     { size: "XXL", height: [179, 185], weight: [73, 82] },
   ],
 };
-function suggestClosestSizes(height, weight, bodyShape) {
+export function suggestClosestSizes(height, weight, bodyShape) {
     const sizes = sizeData[bodyShape];
     if (!sizes) return "Dáng người không hợp lệ.";
   

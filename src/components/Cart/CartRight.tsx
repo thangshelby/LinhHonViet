@@ -36,7 +36,7 @@ const CartRight = ({
       <div className="flex w-full flex-col space-y-2">
         <div className="flex flex-row justify-between border-b-[1px] border-gray-300 py-1 text-[1.4rem] md:text-[1.8rem] lg:text-[1.8rem]">
           <h3 className="font-base_regular text-[#333333]">Tạm tính</h3>
-          <p className="font-raleway font-extrabold">4.531.000 VND</p>
+          <p className="font-raleway font-bold">4.531.000 VND</p>
         </div>
         <h3 className="font-raleway text-[1.4rem] text-[#333333] md:text-[1.6rem] lg:text-[1.8rem]">
           Giao hàng
@@ -95,7 +95,7 @@ const CartRight = ({
           <div className="flex flex-row">
             <div className="flex flex-row space-x-1 font-raleway text-[1.4rem] text-[#222222] md:text-[1.2rem] lg:text-[1.4rem]">
               Vận chuyển đến
-              <p className="ml-[4px] font-extrabold text-[#666666]">
+              <p className="ml-[4px] font-bold text-[#666666]">
                 {" "}
                 {location.district.name != "" && location.district.name }
             {' '}
@@ -147,7 +147,7 @@ const CartRight = ({
           <div className="flex flex-col space-y-4">
             <div className="slide-down flex flex-row items-center justify-between border-b-[4px] border-gray-200 pb-2 font-base_regular text-[1.4rem] font-semibold text-[#333] md:text-[1.6rem] lg:text-[1.8rem]">
               Tổng
-              <p className="font-raleway font-extrabold text-black">
+              <p className="font-raleway font-bold text-black">
                 4.531.000 VND
               </p>
             </div>

@@ -6,7 +6,7 @@ const ShowProductList = ({
   isShownPagination,
   isShowNavigation,
 }: {
-  productPerPage: number;
+  productPerPage?: number;
   isShownPagination: boolean;
   isShowNavigation: boolean;
 }) => {
@@ -29,16 +29,14 @@ const ShowProductList = ({
       );
     }
   }, [start, currentProductIndex, windowWidth]);
-  
-  const handleSwipeNext = () => {
 
+  const handleSwipeNext = () => {
     setStart((start + 1 + products.length) % products.length);
   };
   const handleSwipePrev = () => {
-    if(start === 0){
-        setStart(products.length - 2);
-    }else{
-
+    if (start === 0) {
+      setStart(products.length - 2);
+    } else {
       setStart((start - 1 + products.length) % products.length);
     }
   };
@@ -46,16 +44,30 @@ const ShowProductList = ({
   return (
     <div className="relative w-full">
       {/* PRODUCT CARDS */}
-      <div
-        className={`relative flex flex-row items-start justify-between space-x-[2.4rem] lg:space-x-[2rem]`}
-      >
-        {filterProducts &&
-          filterProducts.map((product, index) => (
-            <div key={index} className={`py-[1rem]`}>
-              <ProductCard product={product} />
-            </div>
-          ))}
-      </div>
+
+      {productPerPage ? (
+        <div
+          className={`relative flex flex-row items-start justify-between space-x-[2.4rem] lg:space-x-[2rem]`}
+        >
+          {filterProducts &&
+            filterProducts.map((product, index) => (
+              <div key={index} className={`py-[1rem]`}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+        </div>
+      ) : (
+        <div
+          className={`relative flex flex-row items-start justify-between flex-wrap`}
+        >
+          {filterProducts &&
+            products.map((product, index) => (
+              <div key={index} className={`py-[1rem] md:w-[32%] w-[48%]`}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+        </div>
+      )}
 
       {/* NAVIGATION ARROW  */}
       {isShowNavigation && (
